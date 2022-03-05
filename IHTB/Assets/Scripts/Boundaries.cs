@@ -12,8 +12,8 @@ public class Boundaries : MonoBehaviour
     void Start()
     {
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, this.transform.position.z));
-        objectWidth = transform.GetComponent<SpriteRenderer>().bounds.size.x;
-        objectHeight = transform.GetComponent<SpriteRenderer>().bounds.size.y;
+        objectWidth = transform.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+        objectHeight = transform.GetComponent<SpriteRenderer>().bounds.size.y / 2;
     }
 
     // Update is called once per frame
