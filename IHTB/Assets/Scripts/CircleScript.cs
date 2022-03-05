@@ -16,4 +16,10 @@ public class CircleScript : MonoBehaviour
   {
     circle.velocity = InputManagerScript.Instance.Movement * speed;
   }
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        this.gameObject.SetActive(false);
+    }
 }
