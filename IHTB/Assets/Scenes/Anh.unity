@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 271845405}
   - component: {fileID: 271845408}
   - component: {fileID: 271845409}
+  - component: {fileID: 271845410}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -271,6 +272,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &271845410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271845404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b450a87023245e46adcb59eeb3358e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &473043371
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,6 +316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Movement: {x: 0, y: 0}
   Pausing: 0
+  FineMovement: 0
 --- !u!114 &473043373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,6 +374,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3cb642c8-aa3c-48da-883f-b40bfdde3ac0
     m_ActionName: Player/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 732f6515-9353-4f06-aa3f-f15d2c8667be
+    m_ActionName: Player/FineModifier[/Keyboard/leftShift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
