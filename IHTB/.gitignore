@@ -73,3 +73,6 @@ crashlytics-build.properties
 
 # Stuff added by IHTB team
 .vscode/
+
+# bug
+EditorUserSettings.asset
