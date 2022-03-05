@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class RandomSeagull : Seagull
 {
-  [SerializeField] private float _speed = 2f;
+  [SerializeField] private Vector2 _vector;
 
+    void Awake()
+    {
+        _vector = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
+        _vector.Normalize();
+        _vector *= 2; 
+    }
   protected override void UpdateOwnPosition() {
-    this._seagull.GetComponent<Rigidbody2D>().velocity = new Vector2(_speed, 0);
+    this._seagull.GetComponent<Rigidbody2D>().velocity = _vector;
   }
 }

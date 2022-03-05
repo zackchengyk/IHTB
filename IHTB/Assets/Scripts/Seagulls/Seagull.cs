@@ -9,7 +9,7 @@ public abstract class Seagull : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    Debug.Log("Seagull spawned!");
+        Debug.Log("Seagull spawned!");
   }
 
   // Update is called once per frame
@@ -19,4 +19,5 @@ public abstract class Seagull : MonoBehaviour
   }
 
   protected abstract void UpdateOwnPosition();
+
 }

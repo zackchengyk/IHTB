@@ -13,7 +13,7 @@ public class BulletSpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnSimpleBullet", 2.0f, 0.3f);
+        InvokeRepeating("SpawnSimpleBullet", 0.0f, 0.3f);
     }
 
     // Update is called once per frame
@@ -26,11 +26,14 @@ public class BulletSpawn : MonoBehaviour
     {
         Debug.Log("called!");
         GameObject temp = Instantiate(_bulletPrefab, this.transform.position, Quaternion.identity) as GameObject;
+
+        //SpawnBullet(new Vector2(2, 0), new Vector2(1, 1));
     }
 
-    /*void SpawnBullet(Vec2 location, Vec2 velocity)
+    void SpawnBullet(Vector2 location, Vector2 velocity)
     {
-        GameObject temp = Instantiate(Resources.Load("DeathParticles"), location, Quaternion.identity) as GameObject;
-    }*/
+        GameObject temp = Instantiate(_bulletPrefab, location, Quaternion.identity) as GameObject;
+        temp.GetComponent<Rigidbody2D>().velocity = velocity;
+    }
 
 }
