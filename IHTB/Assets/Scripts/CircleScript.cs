@@ -22,6 +22,7 @@ public class CircleScript : MonoBehaviour
     {
       circle.velocity *= fineMovementModifier;
     }
+    Debug.Log(circle.position);
   }
 
 
