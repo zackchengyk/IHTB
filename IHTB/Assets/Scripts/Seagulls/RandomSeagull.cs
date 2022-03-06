@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TO DELETE
+
 public class RandomSeagull : Seagull
 {
   [SerializeField] private Vector2 _vector;

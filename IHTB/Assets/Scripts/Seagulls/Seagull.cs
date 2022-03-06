@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TO DELETE
+
 public abstract class Seagull : MonoBehaviour
 {
   [SerializeField] protected GameObject _seagull;
