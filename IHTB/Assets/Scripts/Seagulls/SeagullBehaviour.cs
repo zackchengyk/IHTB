@@ -22,4 +22,10 @@ public abstract class SeagullBehaviour : MonoBehaviour
   // Must be overridden by concrete SeagullBehaviour
   protected abstract void StartSeagullBehaviour();
   protected abstract void UpdateSeagullBehaviour();
+
+  // Helpers
+  protected void SetSpriteRotationToVec2(Vector2 vec) {
+    var angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
+    this._seagull.GetComponentInChildren<Rigidbody2D>().rotation = angle;
+  }
 }

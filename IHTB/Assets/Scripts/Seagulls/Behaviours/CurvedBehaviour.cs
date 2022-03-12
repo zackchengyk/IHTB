@@ -7,7 +7,10 @@ public class CurvedBehaviour : SeagullBehaviour
 
   protected override void StartSeagullBehaviour()
   {
+    // Set initial velocity
     this._seagull.GetComponentInChildren<Rigidbody2D>().velocity = this.initialVelocity;
+
+    // Set rotation direction
     if (Random.value < 0.5) {
       radiansPerTime *= -1;
     }
@@ -17,8 +20,12 @@ public class CurvedBehaviour : SeagullBehaviour
   {
     radiansPerTime = radiansPerTime * (1.0f - 0.5f * Time.deltaTime);
 
-    this._seagull.GetComponentInChildren<Rigidbody2D>().velocity = 
-      Rotate(this._seagull.GetComponentInChildren<Rigidbody2D>().velocity, Time.deltaTime * radiansPerTime);
+    // Set velocity
+    var newDirection = Rotate(this._seagull.GetComponentInChildren<Rigidbody2D>().velocity, Time.deltaTime * radiansPerTime);
+    this._seagull.GetComponentInChildren<Rigidbody2D>().velocity = newDirection;
+
+    // Set transform rotation
+    SetSpriteRotationToVec2(newDirection.normalized);
   }
 
   // Helper
