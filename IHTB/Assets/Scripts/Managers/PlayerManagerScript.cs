@@ -18,6 +18,8 @@ public class PlayerManagerScript : MonoBehaviour
   {
     if (Player.GetComponentInChildren<Rigidbody2D>()) {
       _lastPlayerLocation = Player.GetComponentInChildren<Rigidbody2D>().position;
+      //_lastPlayerLocation = Player.transform.position;
+    
     }
     return _lastPlayerLocation;
   }
