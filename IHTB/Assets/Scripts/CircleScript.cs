@@ -7,6 +7,7 @@ public class CircleScript : MonoBehaviour
   [SerializeField] public Rigidbody2D circle;
   [SerializeField] public float speed = 5f;
   [SerializeField] public float fineMovementModifier = 0.5f;
+    private static bool pausing;
 
   // Start is called before the first frame update
   void Start()
@@ -17,7 +18,21 @@ public class CircleScript : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    circle.velocity = InputManagerScript.Instance.Movement * speed;
+        //check if game is paused
+        pausing = InputManagerScript.Instance.Pausing;
+        Debug.Log("paused: " + pausing);
+        // if the game is paused, set timescale to zero, and stop updating
+        if (pausing)
+        {
+            Time.timeScale = 0f;
+            return;
+
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+        circle.velocity = InputManagerScript.Instance.Movement * speed;
     if (InputManagerScript.Instance.FineMovement)
     {
       circle.velocity *= fineMovementModifier;
