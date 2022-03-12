@@ -2,23 +2,26 @@
 
 public class ApproachUserBehavior : SeagullBehaviour
 {
-    private Vector2 playerPosition = PlayerManagerScript.Instance.GetPlayerPosition();
-    private Vector2 seagullPosition;
+  [SerializeField] private float _speed = 2.5f;
 
-    protected override void StartSeagullBehaviour()
-    {
-        seagullPosition = this.transform.position;
-        Vector2 direction = playerPosition - seagullPosition;
-        Debug.Log("playerPosition" + playerPosition);
-        Debug.Log("direction.x: " + direction.x + " direction.y: " + direction.y);
+  protected override void StartSeagullBehaviour()
+  {
+    Vector2 playerPosition = PlayerManagerScript.Instance.GetPlayerPosition();
+    Vector2 seagullPosition = this.transform.position;
 
-        // Set velocity
-        this._seagull.GetComponentInChildren<Rigidbody2D>().velocity = direction;
+    Vector2 direction = (playerPosition - seagullPosition).normalized;
+    this.initialVelocity = _speed * direction;
 
-        // Set transform rotation
-        SetSpriteRotationToVec2(this.initialVelocity.normalized);
-    }
+    // Debug.Log("playerPosition" + playerPosition);
+    // Debug.Log("direction.x: " + direction.x + " direction.y: " + direction.y);
 
-    protected override void UpdateSeagullBehaviour() { }
+    // Set velocity
+    this._seagull.GetComponentInChildren<Rigidbody2D>().velocity = this.initialVelocity;
+
+    // Set transform rotation
+    SetSpriteRotationToVec2(this.initialVelocity.normalized);
+  }
+
+  protected override void UpdateSeagullBehaviour() {}
 }
 

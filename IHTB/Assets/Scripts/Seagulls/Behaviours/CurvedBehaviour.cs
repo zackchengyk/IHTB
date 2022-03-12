@@ -21,7 +21,7 @@ public class CurvedBehaviour : SeagullBehaviour
     radiansPerTime = radiansPerTime * (1.0f - 0.5f * Time.deltaTime);
 
     // Set velocity
-    var newDirection = Rotate(this._seagull.GetComponentInChildren<Rigidbody2D>().velocity, Time.deltaTime * radiansPerTime);
+    Vector2 newDirection = Rotate(this._seagull.GetComponentInChildren<Rigidbody2D>().velocity, Time.deltaTime * radiansPerTime);
     this._seagull.GetComponentInChildren<Rigidbody2D>().velocity = newDirection;
 
     // Set transform rotation
