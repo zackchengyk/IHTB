@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 759987636dc7d4770bb23017220a1f73
+=======
+<<<<<<< HEAD:IHTB/Assets/Scripts/RandomBullet.cs.meta
+guid: 0a180d4b8db94af498f7f138f9763144
+=======
+guid: c3c17306a8fcf45d6b52f5c9e6921317
+>>>>>>> 6716cfe (updated ApproachUserBehavior script, not going to player yet):IHTB/Assets/Scripts/Seagulls/Behaviours/ApproachUserBehavior.cs.meta
+>>>>>>> 6716cfe (updated ApproachUserBehavior script, not going to player yet)
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
