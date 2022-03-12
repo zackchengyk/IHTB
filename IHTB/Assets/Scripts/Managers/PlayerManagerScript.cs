@@ -5,7 +5,8 @@ public class PlayerManagerScript : MonoBehaviour
 {
   public static PlayerManagerScript Instance;
   
-  [SerializeField] public GameObject Player;
+  [SerializeField] private GameObject Player;
+  private Vector2 _lastPlayerLocation;
 
   void Awake()
   {
@@ -15,6 +16,9 @@ public class PlayerManagerScript : MonoBehaviour
 
   public Vector2 GetPlayerPosition()
   {
-    return Player.GetComponentInChildren<Rigidbody2D>().position;
+    if (Player.GetComponentInChildren<Rigidbody2D>()) {
+      _lastPlayerLocation = Player.GetComponentInChildren<Rigidbody2D>().position;
+    }
+    return _lastPlayerLocation;
   }
 }
