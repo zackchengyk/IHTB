@@ -44,6 +44,10 @@ public class RandomBullet : MonoBehaviour
             return;
 
         }
+        else
+        {
+            Time.timeScale = 1f;
+        }
      
         //Moves bullet based on the movement vector
         transform.Translate(Movement);
