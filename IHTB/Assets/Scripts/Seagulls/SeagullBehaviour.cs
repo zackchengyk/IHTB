@@ -9,7 +9,7 @@ public abstract class SeagullBehaviour : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    Debug.Log("Seagull started!");
+    Debug.Log("SeagullBehaviour started!");
     this.StartSeagullBehaviour();
   }
 

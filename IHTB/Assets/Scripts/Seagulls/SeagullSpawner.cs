@@ -6,15 +6,26 @@ public abstract class SeagullSpawner : MonoBehaviour
   [SerializeField] protected GameObject _seagull; 
   [SerializeField] protected GameObject _spawner;
 
-  // Todo: make some kind of scroll manager which provides this
+  // TODO: make some kind of scroll manager which provides this
   protected Vector2 scrollVelocity = new Vector2(0, -1);
 
-  // Start is called before the first frame update (protected virtual to allow overriding)
-  protected virtual void Start()
+  // Start is called before the first frame update
+  void Start()
   {
-    Debug.Log("Seagull spawner started!");
+    Debug.Log("SeagullSpawner started!");
+    this.StartSeagullSpawner();
 
-    // Make spawner scroll downward
+    // TODO: there has to be a better way to do this (make the spawner scroll downward)
     this._spawner.GetComponentInChildren<Rigidbody2D>().velocity = scrollVelocity;
   }
+
+  // Update is called once per frame
+  void Update()
+  {
+    this.UpdateSeagullSpawner();
+  }
+
+  // Must be overridden by concrete SeagullSpawner
+  protected abstract void StartSeagullSpawner();
+  protected abstract void UpdateSeagullSpawner();
 }
