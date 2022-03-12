@@ -1,25 +1,18 @@
 ﻿using UnityEngine;
 
-
 public class ApproachUserBehavior : SeagullBehaviour
 {
-    private Vector2 playerPosition = PlayerManagerScript.Instance.GetPlayerPosition();
-    private Vector2 seagullPosition; 
+    public Rigidbody2D player;
 
-    protected override void StartSeagullBehaviour()
-    {
-        seagullPosition = this.transform.position;
-        Vector2 direction = playerPosition - seagullPosition;
-        Debug.Log("direction.x: " + direction.x + " direction.y: " + direction.y);
-
+   protected override void StartSeagullBehaviour()
+   {
         // Set velocity
-        this._seagull.GetComponentInChildren<Rigidbody2D>().velocity = direction;
+        this._seagull.GetComponentInChildren<Rigidbody2D>().velocity = this.initialVelocity;
 
         // Set transform rotation
         SetSpriteRotationToVec2(this.initialVelocity.normalized);
-
     }
 
-    protected override void UpdateSeagullBehaviour() { }
+   protected override void UpdateSeagullBehaviour() { }
 }
 
