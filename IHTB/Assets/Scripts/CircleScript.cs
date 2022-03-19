@@ -38,6 +38,8 @@ public class CircleScript : MonoBehaviour
   // GetHit is called when a projectile hits the player
   public void GetHit(GameObject projectile)
   {
+    // Make seagull take fry
     Debug.Log("Player has been hit!");
+    projectile.GetComponentInChildren<SeagullBehaviour>().FryTaken = !projectile.GetComponentInChildren<SeagullBehaviour>().FryTaken;
   }
 }

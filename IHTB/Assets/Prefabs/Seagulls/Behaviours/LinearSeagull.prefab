@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f16a299c4483a4360a4dd9c276d6c1be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _seagull: {fileID: 7640246645380326823}
+  seagull: {fileID: 7640246645380326823}
   initialVelocity: {x: 0, y: 0}
 --- !u!1 &7640246645380326823
 GameObject:
