@@ -9,7 +9,6 @@ public abstract class SeagullBehaviour : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    Debug.Log("SeagullBehaviour started!");
     this.StartSeagullBehaviour();
   }
 
@@ -27,5 +26,13 @@ public abstract class SeagullBehaviour : MonoBehaviour
   protected void SetSpriteRotationToVec2(Vector2 vec) {
     float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
     this._seagull.GetComponentInChildren<Rigidbody2D>().rotation = angle;
+  }
+
+  // Check if other is player
+  private void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.transform.IsChildOf(PlayerManagerScript.Instance.PlayerGameObject.transform) ) {
+      PlayerManagerScript.Instance.PlayerGameObject.GetComponentInChildren<CircleScript>().GetHit(this.gameObject);
+    }
   }
 }

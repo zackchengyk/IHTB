@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1580707637891259698}
   - component: {fileID: 3411137976534896634}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CurvedSeagull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 4206797296446410791}
   - component: {fileID: 9074399803585925523}
   - component: {fileID: 4365241763037583836}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}

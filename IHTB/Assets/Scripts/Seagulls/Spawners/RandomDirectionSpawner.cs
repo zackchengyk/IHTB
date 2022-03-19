@@ -7,9 +7,7 @@ public class RandomDirectionSpawner : SeagullSpawner
     InvokeRepeating("SpawnSeagull", 0.0f, 0.5f);
   }
 
-  protected override void UpdateSeagullSpawner() {
-    Debug.Log(PlayerManagerScript.Instance.GetPlayerPosition());
-  }
+  protected override void UpdateSeagullSpawner() {}
 
   // Helper: call this to spawn a seagull with a random initial velocity
   private void SpawnSeagull()

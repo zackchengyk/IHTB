@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3266361769039002377}
   - component: {fileID: 1188579979414986425}
   - component: {fileID: 6616007460613961499}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6351039256117595698}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RandomDirectionLinearSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}

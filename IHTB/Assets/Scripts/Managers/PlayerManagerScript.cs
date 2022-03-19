@@ -5,21 +5,25 @@ public class PlayerManagerScript : MonoBehaviour
 {
   public static PlayerManagerScript Instance;
   
-  [SerializeField] private GameObject Player;
+  [SerializeField] private GameObject _player;
   private Vector2 _lastPlayerLocation;
+
+  // Accessor to prevent _player from unauthorized access
+  public GameObject PlayerGameObject
+  {
+    get { return _player; }
+  }
 
   void Awake()
   {
     Instance = this;
-    Debug.Log("Hello, world! PlayerManager awake.");
   }
 
   public Vector2 GetPlayerPosition()
   {
-    if (Player.GetComponentInChildren<Rigidbody2D>()) {
-      _lastPlayerLocation = Player.GetComponentInChildren<Rigidbody2D>().position;
-      //_lastPlayerLocation = Player.transform.position;
-    
+    // Cache last location
+    if (_player.GetComponentInChildren<Rigidbody2D>()) {
+      _lastPlayerLocation = _player.GetComponentInChildren<Rigidbody2D>().position;
     }
     return _lastPlayerLocation;
   }

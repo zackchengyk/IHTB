@@ -12,9 +12,6 @@ public class ApproachUserBehavior : SeagullBehaviour
     Vector2 direction = (playerPosition - seagullPosition).normalized;
     this.initialVelocity = _speed * direction;
 
-    // Debug.Log("playerPosition" + playerPosition);
-    // Debug.Log("direction.x: " + direction.x + " direction.y: " + direction.y);
-
     // Set velocity
     this._seagull.GetComponentInChildren<Rigidbody2D>().velocity = this.initialVelocity;
 

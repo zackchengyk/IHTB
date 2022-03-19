@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8440217915315180432}
   - component: {fileID: 4972762078947297166}
   - component: {fileID: 7826686705725671239}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8716114996748244295}
   - component: {fileID: 1042954726}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LinearSeagull
   m_TagString: Untagged
   m_Icon: {fileID: 0}

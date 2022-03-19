@@ -12,7 +12,6 @@ public abstract class SeagullSpawner : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    Debug.Log("SeagullSpawner started!");
     this.StartSeagullSpawner();
 
     // TODO: there has to be a better way to do this (make the spawner scroll downward)
