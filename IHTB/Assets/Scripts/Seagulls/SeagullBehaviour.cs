@@ -61,6 +61,8 @@ public abstract class SeagullBehaviour : MonoBehaviour
   // On trigger enter, check if other collider is player's and if so, call player's GetHit() method
   private void OnTriggerEnter2D(Collider2D other)
   {
+    Debug.Log("HELLO");
+        Debug.Log(PlayerManagerScript.Instance.PlayerGameObject.name);
     if (other.transform.IsChildOf(PlayerManagerScript.Instance.PlayerGameObject.transform) ) {
       PlayerManagerScript.Instance.PlayerGameObject.GetComponentInChildren<CircleScript>().GetHit(this.gameObject);
     }

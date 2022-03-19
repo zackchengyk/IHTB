@@ -22,11 +22,15 @@ public class LivesSystem : MonoBehaviour
             {
                 GameObject life = Instantiate(alivePrefab, transform.position, Quaternion.identity);
                 life.transform.parent = transform;
+                life.gameObject.SetActive(true);
+                Debug.Log("transform: " + transform.position);
+                Debug.Log("life.transform.parent: " + life.transform.parent.position);
             }
             else
             {
                 GameObject life = Instantiate(deadPrefab, transform.position, Quaternion.identity);
                 life.transform.parent = transform;
+                life.gameObject.SetActive(true);
             }
         }
     }
