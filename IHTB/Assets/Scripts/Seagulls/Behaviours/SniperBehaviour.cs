@@ -1,0 +1,47 @@
+using System.Collections;
+using UnityEngine;
+
+public class SniperBehaviour : SeagullBehaviour
+{
+  private int _phase = 0;
+
+  protected override void StartSeagullBehaviour()
+  {
+    // Set velocity
+    this.Velocity = this.initialVelocity;
+
+    // Set transform rotation
+    SetSpriteRotationToVec2(this.initialVelocity.normalized);
+
+    // Start coroutine
+    StartCoroutine(UpdatePhase());
+  }
+
+  protected override void UpdateSeagullBehaviour()
+  {
+    if (_phase == 1) {
+      // Fix position and match rotation to face player
+      this.Velocity = Vector2.zero;
+      SetSpriteRotationToVec2((PlayerManagerScript.Instance.GetPlayerPosition() - this.Position).normalized);
+    }
+  }
+
+  IEnumerator UpdatePhase()
+  {
+    // First phase: fly in initial velocity
+    _phase = 0;
+
+    // Wait
+    yield return new WaitForSeconds(1.0f);
+    
+    // Second phase: fix position and match rotation to face player
+    _phase = 1;
+
+    // Wait
+    yield return new WaitForSeconds(1.5f);
+
+    // Third phase:  fly in a straight line towards players last-known location
+    _phase = 2;
+    this.Velocity = (PlayerManagerScript.Instance.GetPlayerPosition() - this.Position).normalized * 3;
+  }
+}
