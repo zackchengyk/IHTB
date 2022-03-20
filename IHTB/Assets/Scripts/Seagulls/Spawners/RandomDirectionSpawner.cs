@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class RandomDirectionSpawner : SeagullSpawner
 {
+  [SerializeField] private float _spawnDelay  = 0.0f;
+  [SerializeField] private float _spawnPeriod = 0.5f;
+  [SerializeField] private float _spawnInitialSpeed = 3.0f;
+
   protected override void StartSeagullSpawner()
   {
-    InvokeRepeating("SpawnSeagull", 0.0f, 0.5f);
+    InvokeRepeating("SpawnSeagull", _spawnDelay, _spawnPeriod);
   }
 
   protected override void UpdateSeagullSpawner() {}
@@ -13,7 +17,7 @@ public class RandomDirectionSpawner : SeagullSpawner
   private void SpawnSeagull()
   {
     GameObject obj = Instantiate(_seagull, this.transform.position, Quaternion.identity) as GameObject;
-    obj.GetComponentInChildren<SeagullBehaviour>().initialVelocity = RandomUnitVector() * 3.0f + scrollVelocity;
+    obj.GetComponentInChildren<SeagullBehaviour>().initialVelocity = RandomUnitVector() * _spawnInitialSpeed + scrollVelocity;
   }
 
   // Helper: get a random unit vector
