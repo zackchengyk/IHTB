@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CircleScript : MonoBehaviour
+public class PlayerScript : MonoBehaviour
 {
   [SerializeField] public Rigidbody2D circle;
   [SerializeField] public float speed = 5f;

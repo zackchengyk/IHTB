@@ -64,7 +64,7 @@ public abstract class SeagullBehaviour : MonoBehaviour
     Debug.Log("HELLO");
         Debug.Log(PlayerManagerScript.Instance.PlayerGameObject.name);
     if (other.transform.IsChildOf(PlayerManagerScript.Instance.PlayerGameObject.transform) ) {
-      PlayerManagerScript.Instance.PlayerGameObject.GetComponentInChildren<CircleScript>().GetHit(this.gameObject);
+      PlayerManagerScript.Instance.PlayerGameObject.GetComponentInChildren<PlayerScript>().GetHit(this.gameObject);
     }
   }
 }
