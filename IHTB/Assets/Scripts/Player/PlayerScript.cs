@@ -4,7 +4,6 @@ public class PlayerScript : MonoBehaviour
 {
   [SerializeField] public Rigidbody2D circle;
   [SerializeField] public float speed = 5f;
-  [SerializeField] public float fineMovementModifier = 0.5f;
   private static bool pausing;
   private Vector3 initialPosition;
 
@@ -37,26 +36,19 @@ public class PlayerScript : MonoBehaviour
     
     // Update velocity
     circle.velocity = InputManagerScript.Instance.Movement * speed;
-    if (InputManagerScript.Instance.FineMovement)
-    {
-      circle.velocity *= fineMovementModifier;
-    }
   }
 
   // GetHit is called when a projectile hits the player
   public void GetHit(GameObject projectile)
   {
     // Make seagull take fry
-    Debug.Log("Player has been hit!");
     projectile.GetComponentInChildren<SeagullBehaviour>().FryTaken = !projectile.GetComponentInChildren<SeagullBehaviour>().FryTaken;
 
+    // Decrement HP
     lives--;
-    Debug.Log("Still has " + lives);
     livesSystem.DisplayLives(lives, maxLives);
-    this.gameObject.transform.position = this.initialPosition;
-    if (lives == 0)
-    {
-        this.gameObject.SetActive(false);
-    }
+
+    // Die
+    if (lives == 0) this.gameObject.SetActive(false);
   }
 }

@@ -198,10 +198,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alivePrefab: {fileID: 8802398024985742347, guid: cd1dd8989e65b4214a2ce5f1fa8a57eb, type: 3}
   deadPrefab: {fileID: 4490021135550274607, guid: fc16374c7d72240988505747bc4e554a, type: 3}
---- !u!1 &496558117 stripped
+--- !u!1 &1224851578 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 3675948920343837027, guid: 567b4ba0386004f7d853275a674e6c06, type: 3}
-  m_PrefabInstance: {fileID: 1564928851}
+  m_CorrespondingSourceObject: {fileID: 6493931255120153074, guid: 3b4edb2a908654f35aeb8271597e8a73, type: 3}
+  m_PrefabInstance: {fileID: 6493931253895498120}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1269030640
 PrefabInstance:
@@ -216,7 +216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5309834053709034128, guid: f72316f28070946268201129b71135f8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6351039256117595698, guid: f72316f28070946268201129b71135f8, type: 3}
       propertyPath: m_RootOrder
@@ -338,7 +338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3967463102332581508, guid: 99c809748f6074dff8095d2d3a2e8c0a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6781895489646597781, guid: 99c809748f6074dff8095d2d3a2e8c0a, type: 3}
       propertyPath: m_RootOrder
@@ -399,7 +399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7257600145871257122, guid: 90bb853bf84244be49831c860c700d6c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8442861292117590656, guid: 90bb853bf84244be49831c860c700d6c, type: 3}
       propertyPath: m_RootOrder
@@ -537,10 +537,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 398660598, guid: c16fb48b1c1874294af23db044f306a0, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onDodgeRollInput
+      objectReference: {fileID: 0}
     - target: {fileID: 2420583277916864594, guid: c16fb48b1c1874294af23db044f306a0, type: 3}
       propertyPath: _player
       value: 
-      objectReference: {fileID: 496558117}
+      objectReference: {fileID: 1224851578}
     - target: {fileID: 7006323599200891948, guid: c16fb48b1c1874294af23db044f306a0, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -646,7 +650,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6493931255120153077, guid: 3b4edb2a908654f35aeb8271597e8a73, type: 3}
+      propertyPath: _livesSystem
+      value: 
+      objectReference: {fileID: 268172831}
+    m_RemovedComponents:
+    - {fileID: 1224851583, guid: 3b4edb2a908654f35aeb8271597e8a73, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3b4edb2a908654f35aeb8271597e8a73, type: 3}
 --- !u!1001 &8362484894748078745
 PrefabInstance:
