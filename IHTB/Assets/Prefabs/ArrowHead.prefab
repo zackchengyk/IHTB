@@ -114,7 +114,6 @@ GameObject:
   - component: {fileID: 6493931255120153075}
   - component: {fileID: 6493931255120153077}
   - component: {fileID: 1224851582}
-  - component: {fileID: 1224851583}
   m_Layer: 8
   m_Name: ArrowHead
   m_TagString: Untagged
@@ -173,6 +172,14 @@ MonoBehaviour:
   _speed: 3
   _rollSpeedMultiplier: 2
   _rollDuration: 0.4
+  _rollCooldown: 0.1
+  _currentHP: 3
+  _maxHP: 3
+  _livesSystem: {fileID: 0}
+  _hitShakeDurationRealtime: 1
+  _hitTimeScale: 0.5
+  _hitInvulnerabilityPeriodRealtime: 1
+  _deathDuration: 1
 --- !u!58 &1224851582
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -188,16 +195,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.4
---- !u!114 &1224851583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6493931255120153074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf101358ab554b22b3f7565c93b3a79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Radius: 0.35

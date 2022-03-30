@@ -392,7 +392,7 @@
     },
     "m_Name": "MoveSpeed",
     "m_DefaultReferenceName": "Vector2_0a8a077f80dd461885c13ecb840ccfc3",
-    "m_OverrideReferenceName": "_Velocity",
+    "m_OverrideReferenceName": "_MoveSpeed",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,

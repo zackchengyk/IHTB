@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class WallSpawner : SeagullSpawner
 {
-    protected override void StartSeagullSpawner()
+  protected override void StartSeagullSpawner()
+  {
+    int xGap = Random.Range(-5, 2);
+    for (int i = -8; i<8; i++)
     {
-        int xgap = Random.Range(-5, 2);
-        scrollVelocity = new Vector2(0f, 0f);
-        for(int i = -8; i<8; i++)
-        {
-            if(i != xgap)
-            {
-                SpawnSeagull(this.transform.position + Vector3.right * i);
-            }
-        }
+      if (i != xGap)
+      {
+        SpawnSeagull(this.transform.position + Vector3.right * i);
+      }
     }
+  }
 
-    protected override void UpdateSeagullSpawner() { }
+  protected override void UpdateSeagullSpawner() { }
 
-    private void SpawnSeagull(Vector3 pos)
-    {
-        GameObject obj = Instantiate(_seagull, pos, Quaternion.identity) as GameObject;
-        obj.GetComponentInChildren<SeagullBehaviour>().initialVelocity = new Vector2(0f, -1f) * 3.0f;
-    }
+  private void SpawnSeagull(Vector3 pos)
+  {
+    GameObject obj = Instantiate(_seagull, pos, Quaternion.identity) as GameObject;
+    obj.GetComponentInChildren<SeagullBehaviour>().initialVelocity = new Vector2(0f, -1f) * 3.0f;
+  }
 }

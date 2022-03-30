@@ -4,16 +4,13 @@ using UnityEngine;
 public class SniperBehaviour : SeagullBehaviour
 {
   private int _phase = 0;
-  private float _doubleSpeed = 0.0f;
-
-  // TODO: there has to be a better way to swap between screen-space to world-space velocities...
-  private Vector2 scrollVelocity = new Vector2(0, -1);
+  private float _doubleSpeed;
 
   protected override void StartSeagullBehaviour()
   {
     // Set velocity
     this.Velocity = this.initialVelocity;
-    this._doubleSpeed = (this.initialVelocity - this.scrollVelocity).magnitude * 2;
+    this._doubleSpeed = (this.initialVelocity - ScrollManagerScript.Instance.ScrollVelocity).magnitude * 2;
 
     // Set transform rotation
     SetSpriteRotationToVec2(this.initialVelocity.normalized);

@@ -17,7 +17,8 @@ public class RandomDirectionSpawner : SeagullSpawner
   private void SpawnSeagull()
   {
     GameObject obj = Instantiate(_seagull, this.transform.position, Quaternion.identity) as GameObject;
-    obj.GetComponentInChildren<SeagullBehaviour>().initialVelocity = RandomUnitVector() * _spawnInitialSpeed + scrollVelocity;
+    
+    obj.GetComponentInChildren<SeagullBehaviour>().initialVelocity = RandomUnitVector() * _spawnInitialSpeed;
   }
 
   // Helper: get a random unit vector

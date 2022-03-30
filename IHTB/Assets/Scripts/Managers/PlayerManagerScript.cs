@@ -9,10 +9,7 @@ public class PlayerManagerScript : MonoBehaviour
   private Vector2 _lastPlayerLocation;
 
   // Accessor to prevent _player from unauthorized access
-  public GameObject PlayerGameObject
-  {
-    get { return _player; }
-  }
+  public GameObject PlayerGameObject { get { return _player; } }
 
   void Awake()
   {

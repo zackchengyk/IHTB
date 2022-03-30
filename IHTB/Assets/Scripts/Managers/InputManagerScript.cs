@@ -27,7 +27,8 @@ public class InputManagerScript : MonoBehaviour
   {
     if (context.started)
     { 
-      Pausing = !Pausing; 
+      Pausing = !Pausing;
+      Time.timeScale = Pausing ? 0 : 1;
     }
   }
 

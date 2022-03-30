@@ -136,6 +136,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _seagull: {fileID: 959048563239229203, guid: 0134810da6ba9415cae20ca04263687b, type: 3}
   _spawner: {fileID: 7257600145871257122}
+  _spawnDelay: 0
+  _spawnPeriod: 0.5
+  _spawnInitialSpeed: 3
 --- !u!1 &7257600145871257122
 GameObject:
   m_ObjectHideFlags: 0

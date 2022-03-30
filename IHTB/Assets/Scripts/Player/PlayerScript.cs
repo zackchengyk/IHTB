@@ -22,17 +22,8 @@ public class PlayerScript : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    // Check if game is paused
-    pausing = InputManagerScript.Instance.Pausing;
-
-    // If the game is paused, set timescale to zero, and stop updating
-    if (pausing) {
-      Time.timeScale = 0f;
-      return;
-    }
-
-    // If game is not paused, set timescale to 1
-    Time.timeScale = 1f;
+    // If the game is paused, return
+    if (InputManagerScript.Instance.Pausing) return;
     
     // Update velocity
     circle.velocity = InputManagerScript.Instance.Movement * speed;
