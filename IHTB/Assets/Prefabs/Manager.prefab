@@ -214,8 +214,8 @@ MonoBehaviour:
   _target: {fileID: 0}
   _neutral: {x: 0, y: 0, z: -10}
   _seed: {x: 0, y: 0}
-  _defaultFrequencyScale: 20
-  _defaultAmplitudeScale: {x: 0.2, y: 0.2}
+  _defaultFrequencyScale: 15
+  _defaultAmplitudeScale: {x: 0.25, y: 0.25}
 --- !u!1 &4426826430656851650
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60611f38443fb458eb69454410546b22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scrollVelocity: {x: 0, y: -1}
+  _scrollVelocity: {x: 0, y: -1.5}
   _backgroundScrollerMaterial: {fileID: 2100000, guid: 5ba35c106e8504c6e9c64a5c09250fab, type: 2}
 --- !u!1 &7702101505193757247
 GameObject:

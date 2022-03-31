@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_Sprite: {fileID: 3528231746724534747, guid: 6e1d468521f45482d9823018801936b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 1224851582}
   m_Layer: 8
   m_Name: ArrowHead
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,16 +169,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba61c559cc98742a18fbaab5860cdafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
-  _rollSpeedMultiplier: 2
+  _speed: 3.5
+  _rollSpeedMultiplier: 1.7
   _rollDuration: 0.4
-  _rollCooldown: 0.1
+  _rollCooldown: 0.2
   _currentHP: 3
   _maxHP: 3
   _livesSystem: {fileID: 0}
   _hitShakeDurationRealtime: 1
-  _hitTimeScale: 0.5
-  _hitInvulnerabilityPeriodRealtime: 1
+  _hitTimeScale: 1
+  _hitInvulnerabilityPeriodRealtime: 1.5
+  _hitShakeFrequencyScale: 15
+  _hitShakeAmplitudeScale: {x: 0.25, y: 0.25}
   _deathDuration: 1
 --- !u!58 &1224851582
 CircleCollider2D:
@@ -195,4 +197,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.35
+  m_Radius: 0.4

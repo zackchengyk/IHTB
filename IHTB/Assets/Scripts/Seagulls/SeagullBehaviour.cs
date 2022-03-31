@@ -58,11 +58,11 @@ public abstract class SeagullBehaviour : MonoBehaviour
     this.Rotation = angle;
   }
 
-  // On trigger enter, check if other collider is player's and if so, call player's GetHit() method
-  private void OnTriggerEnter2D(Collider2D other)
+  // On trigger stay, check if other collider is player's and if so, call player's GetHit() method
+  private void OnTriggerStay2D(Collider2D other)
   {
     // If collider is not player's, return
-    if (!other.transform.IsChildOf(PlayerManagerScript.Instance.PlayerGameObject.transform)) return;
+    if (!other.CompareTag("Player")) return;
 
     // Call player's GetHit() method
     PlayerManagerScript.Instance.PlayerGameObject.GetComponent<ArrowHead>().GetHit(this.gameObject);

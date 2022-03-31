@@ -16,7 +16,7 @@ public class ShakerManagerScript : MonoBehaviour
   [SerializeField] private Vector2 _seed = Vector2.zero;
 
   [SerializeField] private float   _defaultFrequencyScale = 15f;
-  [SerializeField] private Vector2 _defaultAmplitudeScale = Vector2.one / 3;
+  [SerializeField] private Vector2 _defaultAmplitudeScale = Vector2.one / 4;
 
   // Internal use
   private float   _frequencyScale;

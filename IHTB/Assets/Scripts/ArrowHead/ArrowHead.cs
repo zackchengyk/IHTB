@@ -11,18 +11,21 @@ public class ArrowHead : MonoBehaviour
   private bool _invulnerable = false;
   private bool _isDead = false;
 
-  [SerializeField] private float _speed = 3f;
-  [SerializeField] private float _rollSpeedMultiplier = 2f;
+  [SerializeField] private float _speed = 3.5f;
+  [SerializeField] private float _rollSpeedMultiplier = 1.7f;
   [SerializeField] private float _rollDuration = 0.4f;
-  [SerializeField] private float _rollCooldown = 0.1f;
+  [SerializeField] private float _rollCooldown = 0.2f;
 
   [SerializeField] private int _currentHP = 3;
   [SerializeField] private int _maxHP = 3;
   [SerializeField] private LivesSystem _livesSystem;
 
-  [SerializeField] private float _hitShakeDurationRealtime = 1f;
-  [SerializeField] private float _hitTimeScale = 0.5f;
-  [SerializeField] private float _hitInvulnerabilityPeriodRealtime = 1f;
+  [SerializeField] private float   _hitShakeDurationRealtime = 1f;
+  [SerializeField] private float   _hitTimeScale = 1f;
+  [SerializeField] private float   _hitInvulnerabilityPeriodRealtime = 1.5f;
+  [SerializeField] private float   _hitShakeFrequencyScale = 15f;
+  [SerializeField] private Vector2 _hitShakeAmplitudeScale = Vector2.one / 4;
+
   [SerializeField] private float _deathDuration = 1f;
 
   // Start is called before the first frame update
@@ -78,8 +81,8 @@ public class ArrowHead : MonoBehaviour
   // GetHit is called when a projectile hits the player
   public void GetHit(GameObject projectile)
   {
-    // If invulnerable or rolling, return
-    if (_invulnerable || _isRolling) return;
+    // If the player is dead, do not get hit
+    if (_isDead) return;
 
     // Make seagull take fry
     projectile.GetComponentInChildren<SeagullBehaviour>().FryTaken = !projectile.GetComponentInChildren<SeagullBehaviour>().FryTaken;
@@ -90,7 +93,10 @@ public class ArrowHead : MonoBehaviour
 
 
     // Shake screen
-    ShakerManagerScript.Instance.ShakeOnceNonLinearRealtime(_hitShakeDurationRealtime);
+    ShakerManagerScript.Instance.ShakeOnceNonLinearRealtime(
+      _hitShakeDurationRealtime,
+      _hitShakeFrequencyScale,
+      _hitShakeAmplitudeScale);
 
     // Die
     if (_currentHP == 0)
@@ -113,7 +119,9 @@ public class ArrowHead : MonoBehaviour
   private IEnumerator roll()
   {
     _isRolling = true;
+    Physics2D.IgnoreLayerCollision(7, 8, true);
     _canRoll = false;
+
     _animator.SetTrigger("rollTrigger");
     _animator.speed = 1 / _rollDuration;
     _arrowHeadRB.velocity = InputManagerScript.Instance.Movement * _rollSpeedMultiplier * _speed;
@@ -121,6 +129,8 @@ public class ArrowHead : MonoBehaviour
     yield return new WaitForSeconds(_rollDuration);
 
     _isRolling = false;
+    if (!_invulnerable) Physics2D.IgnoreLayerCollision(7, 8, false);
+
     _animator.speed = 1;
 
     yield return new WaitForSeconds(_rollCooldown);
@@ -132,8 +142,16 @@ public class ArrowHead : MonoBehaviour
   private IEnumerator startInvulnerabilityPeriodRealtime()
   {
     _invulnerable = true;
+    Physics2D.IgnoreLayerCollision(7, 8, true);
+
+    _animator.SetBool("invulnerable", true);
+
     yield return new WaitForSecondsRealtime(_hitInvulnerabilityPeriodRealtime);
+
     _invulnerable = false;
+    if (!_isRolling) Physics2D.IgnoreLayerCollision(7, 8, false);
+
+    _animator.SetBool("invulnerable", false);
   }
 
   // Todo: die
@@ -144,7 +162,7 @@ public class ArrowHead : MonoBehaviour
 
     ScrollManagerScript.Instance.ScrollVelocity = Vector2.zero;
 
-    _animator.SetTrigger("deathTrigger"); // Currently does nothing
+    _animator.SetTrigger("deathTrigger");
     _animator.speed = 1 / _deathDuration;
 
     // Todo: particles
