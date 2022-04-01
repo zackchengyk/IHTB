@@ -33,7 +33,7 @@ public class PlayerScript : MonoBehaviour
   public void GetHit(GameObject projectile)
   {
     // Make seagull take fry
-    projectile.GetComponentInChildren<SeagullBehaviour>().FryTaken = !projectile.GetComponentInChildren<SeagullBehaviour>().FryTaken;
+    projectile.GetComponent<SeagullBehaviour>().FryTaken = true;
 
     // Decrement HP
     lives--;

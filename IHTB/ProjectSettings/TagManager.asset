@@ -15,8 +15,8 @@ TagManager:
   - 
   - Projectiles
   - Player
-  - Boundaries
-  - 
+  - PlayerBoundaries
+  - RecollectionBoundaries
   - 
   - 
   - 

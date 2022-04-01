@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArrowHead : MonoBehaviour
 {
-  private Rigidbody2D _arrowHeadRB;
+  private Rigidbody2D _rigidbody2D;
   private Animator _animator;
   private bool _isRolling = false;
   private bool _canRoll = true;
@@ -28,12 +28,14 @@ public class ArrowHead : MonoBehaviour
 
   [SerializeField] private float _deathDuration = 1f;
 
+  void Awake()
+  {
+    _rigidbody2D = GetComponent<Rigidbody2D>();
+    _animator = GetComponentInChildren<Animator>();
+  }
   // Start is called before the first frame update
   void Start()
   {
-    _arrowHeadRB = gameObject.GetComponent<Rigidbody2D>();
-    _animator = gameObject.GetComponentInChildren<Animator>();
-
     _livesSystem.DisplayLives(_currentHP, _maxHP);
   }
 
@@ -53,7 +55,7 @@ public class ArrowHead : MonoBehaviour
     }
     
     // Update velocity
-    _arrowHeadRB.velocity = InputManagerScript.Instance.Movement * _speed;
+    _rigidbody2D.velocity = InputManagerScript.Instance.Movement * _speed;
 
     // Update running animation state(s)
     updateRunningAnimationStates();
@@ -63,14 +65,14 @@ public class ArrowHead : MonoBehaviour
   private void updateRunningAnimationStates()
   {
     // Set isRunning
-    bool isRunning = _arrowHeadRB.velocity.sqrMagnitude > 0;
+    bool isRunning = _rigidbody2D.velocity.sqrMagnitude > 0;
     _animator.SetBool("isRunning", isRunning);
 
     // Don't bother with direction if not running
     if (!isRunning) return;
 
     // Set runningDirection
-    Vector2 vec = _arrowHeadRB.velocity.normalized;
+    Vector2 vec = _rigidbody2D.velocity.normalized;
     float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
     if      (-135 <= angle && angle <= -45) _animator.SetInteger("runningDirection", 0);
     else if ( -45 <  angle && angle <   45) _animator.SetInteger("runningDirection", 1);
@@ -85,12 +87,11 @@ public class ArrowHead : MonoBehaviour
     if (_isDead) return;
 
     // Make seagull take fry
-    projectile.GetComponentInChildren<SeagullBehaviour>().FryTaken = !projectile.GetComponentInChildren<SeagullBehaviour>().FryTaken;
+    projectile.GetComponent<SeagullBehaviour>().FryTaken = true;
 
     // Decrement HP
     _currentHP--;
     _livesSystem.DisplayLives(_currentHP, _maxHP);
-
 
     // Shake screen
     ShakerManagerScript.Instance.ShakeOnceNonLinearRealtime(
@@ -101,7 +102,7 @@ public class ArrowHead : MonoBehaviour
     // Die
     if (_currentHP == 0)
     {
-      StartCoroutine("die");
+      StartCoroutine(die());
       return;
     }
     
@@ -109,8 +110,8 @@ public class ArrowHead : MonoBehaviour
     TimeManagerScript.Instance.SlowTimeNonLinearRealtime(_hitTimeScale, _hitShakeDurationRealtime);
 
     // Create invulnerability period (may be less or more than shake duration)
-    StopCoroutine("startInvulnerabilityPeriodRealtime");
-    StartCoroutine("startInvulnerabilityPeriodRealtime");
+    StopCoroutine (startInvulnerabilityPeriodRealtime());
+    StartCoroutine(startInvulnerabilityPeriodRealtime());
   }
 
   /* Helper coroutines */
@@ -124,7 +125,7 @@ public class ArrowHead : MonoBehaviour
 
     _animator.SetTrigger("rollTrigger");
     _animator.speed = 1 / _rollDuration;
-    _arrowHeadRB.velocity = InputManagerScript.Instance.Movement * _rollSpeedMultiplier * _speed;
+    _rigidbody2D.velocity = InputManagerScript.Instance.Movement * _rollSpeedMultiplier * _speed;
 
     yield return new WaitForSeconds(_rollDuration);
 
@@ -158,8 +159,9 @@ public class ArrowHead : MonoBehaviour
   private IEnumerator die()
   {
     _isDead = true;
-    _arrowHeadRB.velocity = Vector2.zero;
+    _rigidbody2D.velocity = Vector2.zero;
 
+    PlayerManagerScript.Instance.PlayerIsAlive = false;
     ScrollManagerScript.Instance.ScrollVelocity = Vector2.zero;
 
     _animator.SetTrigger("deathTrigger");

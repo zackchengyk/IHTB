@@ -44,17 +44,4 @@ public class InputManagerScript : MonoBehaviour
       DodgeRoll = false;
     }
   }
-
-  // // Hold to toggle fine movement
-	// public void onFineModifierInput(InputAction.CallbackContext context)
-  // {
-  //   if (context.started)
-  //   {
-  //     FineMovement = true;
-  //   }
-  //   else if (context.canceled)
-  //   {
-  //     FineMovement = false;
-  //   }
-  // }
 }
