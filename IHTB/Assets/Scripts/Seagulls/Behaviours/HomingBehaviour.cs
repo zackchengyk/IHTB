@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class HomingBehaviour : SeagullBehaviour
 {
-  // Limit turning rate, and set to zero after some time
-  private float _radiansPerTime = Mathf.PI / 4;
-  private float _homingDuration = 5f;
+  private const float _radiansPerTime = Mathf.PI / 4; // limit turning rate
+  private const float _homingDuration = 2f;           // stop homing after some time
+  public bool _isHoming;                              // stop homing after some time
 
   protected override void EnableSeagullBehaviour()
   {
-    StartCoroutine(StopHomingAfterTime());
+    // Set defaults
+    _isHoming = true;
+
+    StartCoroutine("stopHomingAfterTime");
   }
 
   protected override void UpdateSeagullBehaviour()
@@ -19,13 +22,16 @@ public class HomingBehaviour : SeagullBehaviour
     Vector2 direction = (PlayerManagerScript.Instance.GetPlayerPosition() - Position).normalized;
 
     // Set velocity
-    Velocity = Vector3.RotateTowards(Velocity, direction, _radiansPerTime * Time.deltaTime, 0);
+    if (_isHoming) Velocity = Vector3.RotateTowards(Velocity, direction, _radiansPerTime * Time.deltaTime, 0);
   }
 
-  private IEnumerator StopHomingAfterTime()
+  protected override void DisableSeagullBehaviour() { StopCoroutine("stopHomingAfterTime"); }
+
+  // Helper
+  private IEnumerator stopHomingAfterTime()
   {
     yield return new WaitForSeconds(_homingDuration);
-    _radiansPerTime = 0;
+    _isHoming = false;
   }
 }
 

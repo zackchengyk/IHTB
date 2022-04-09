@@ -3,12 +3,10 @@ using UnityEngine;
 
 public class SniperBehaviour : SeagullBehaviour
 {
-  // Limit turning rate
-  private const float _radiansPerTime = Mathf.PI / 4;
-
-  private int _phase = 0;
-  private float _doubleSpeed;
-  private Vector2 _previousDirection;
+  private const float _radiansPerTime = Mathf.PI / 4; // limit turning rate
+  private int _phase;                                 // keep track of current phase
+  private float _doubleSpeed;                         // keep track of 2 x initial speed
+  private Vector2 _rotationDirection;                 // keep track of rotation as a direction vector 
 
   protected override void EnableSeagullBehaviour()
   {
@@ -16,7 +14,7 @@ public class SniperBehaviour : SeagullBehaviour
     _doubleSpeed = Velocity.magnitude * 2;
 
     // Start coroutine
-    StartCoroutine(UpdatePhase());
+    StartCoroutine("updatePhase");
   }
 
   protected override void UpdateSeagullBehaviour()
@@ -27,12 +25,20 @@ public class SniperBehaviour : SeagullBehaviour
       Velocity = Vector2.zero;
 
       // Rotate towards player
-      _previousDirection = Vector3.RotateTowards(_previousDirection, getNormalizedDirectionToPlayer(), _radiansPerTime, 0);
-      SetSpriteRotation(_previousDirection);
+      _rotationDirection = Vector3.RotateTowards(
+        _rotationDirection,
+        getNormalizedDirectionToPlayer(),
+        _radiansPerTime,
+        0);
+      SetSpriteRotation(_rotationDirection);
     }
   }
 
-  private IEnumerator UpdatePhase()
+  protected override void DisableSeagullBehaviour() { StopCoroutine("updatePhase"); }
+
+  // ================== Helpers
+
+  private IEnumerator updatePhase()
   {
     // First phase: fly in initial velocity
     _phase = 0;
@@ -41,13 +47,13 @@ public class SniperBehaviour : SeagullBehaviour
     
     // Second phase: fix position and match rotation to face player
     _phase = 1;
-    _previousDirection = getNormalizedDirectionToPlayer();
+    _rotationDirection = getNormalizedDirectionToPlayer();
 
     yield return new WaitForSeconds(1.5f);
 
     // Third phase: fly in a straight line towards players last-known location
     _phase = 2;
-    Velocity = _previousDirection * _doubleSpeed;
+    Velocity = _rotationDirection * _doubleSpeed;
   }
 
   private Vector2 getNormalizedDirectionToPlayer()

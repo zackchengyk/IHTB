@@ -2,14 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SeagullIndex : int
-{
-  Linear = 0,
-  Curved = 1,
-  Sniper = 2,
-  Homing = 3,
-}
-
 [System.Serializable]
 public class ObjectPoolItem {
   public GameObject objectToPool;
@@ -24,13 +16,11 @@ public class ObjectPooler : MonoBehaviour {
 
   private List<List<GameObject>> _pooledObjects;
 
-	void Awake() {
-		Instance = this;
-	}
+	void Awake() { Instance = this; }
 
 	// Start is called before the first frame update
-  void Start () {
-
+  void Start ()
+  {
     _pooledObjects = new List<List<GameObject>>();
     
     // For each type of thing to pool
