@@ -44,4 +44,10 @@ public class ScrollManagerScript : MonoBehaviour
     Vector4 moveSpeed = _scrollVelocity * -200f / 3f;
     _backgroundScrollerMaterial.SetVector("_MoveSpeed", moveSpeed);
   }
+
+
+  public double getScrollSpeed()
+  {
+    return _scrollVelocity.y; 
+  }
 }
