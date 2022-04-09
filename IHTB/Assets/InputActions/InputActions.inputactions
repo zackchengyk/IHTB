@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "FineModifier",
+                    "name": "DodgeRoll",
                     "type": "Button",
                     "id": "732f6515-9353-4f06-aa3f-f15d2c8667be",
                     "expectedControlType": "Button",
@@ -158,11 +158,11 @@
                 {
                     "name": "",
                     "id": "cfa648df-f5b1-42bb-861d-70265b2e8e26",
-                    "path": "<Keyboard>/leftShift",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "FineModifier",
+                    "action": "DodgeRoll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

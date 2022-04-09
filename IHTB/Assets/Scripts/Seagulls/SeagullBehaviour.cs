@@ -2,69 +2,70 @@ using UnityEngine;
 
 public abstract class SeagullBehaviour : MonoBehaviour
 {
-  // Things to be set when creating an instance of this prefab via Instantiate
-  [SerializeField] private GameObject seagull;
-  public Vector2 initialVelocity;
-
   // Things that are internal
-  private Rigidbody2D _rigidBody2D;
-  private bool _fryTaken = false;
+  private Rigidbody2D _rigidbody2D;
+  private Animator _animator;
+  private Vector2 _initialVelocity;
   
   // Accessors
   public bool FryTaken {
-    get {
-      return _fryTaken;
-    }
-    set {
-      _fryTaken = value;
-      seagull.GetComponent<Animator>().SetBool("FryTaken", _fryTaken);
-    }
+    get { return _animator.GetBool("FryTaken"); }
+    set { _animator.SetBool("FryTaken", value); }
   }
   public Vector2 Position {
-    get { return seagull.GetComponentInChildren<Rigidbody2D>().position; }
+    get { return _rigidbody2D.position; }
+    set { _rigidbody2D.position = value; }
   }
   public Vector2 Velocity {
-    get { return seagull.GetComponentInChildren<Rigidbody2D>().velocity; }
-    set { seagull.GetComponentInChildren<Rigidbody2D>().velocity = value; }
-  }
-  public float Rotation {
-    get { return seagull.GetComponentInChildren<Rigidbody2D>().rotation; }
-    set { seagull.GetComponentInChildren<Rigidbody2D>().rotation = value; }
+    get { return _rigidbody2D.velocity; }
+    set {
+      _rigidbody2D.velocity = value;
+      if (value != Vector2.zero) SetSpriteRotation(value.normalized);
+    }
   }
 
-  // Start is called before the first frame update
-  void Start()
+  void Awake()
   {
-    this.StartSeagullBehaviour();
+    _rigidbody2D = GetComponent<Rigidbody2D>();
+    Debug.Log(_rigidbody2D);
+    _animator = GetComponentInChildren<Animator>();
   }
 
-  // Update is called once per frame
-  void Update()
-  {
-    this.UpdateSeagullBehaviour();
+  void OnEnable() {
+    Velocity = _initialVelocity;
+    EnableSeagullBehaviour();
+  }
 
-    // Check if player is within some distance, and if so, toggle approach animation
-    Vector2 separation = PlayerManagerScript.Instance.GetPlayerPosition() - this.Position;
-    seagull.GetComponent<Animator>().SetBool("Approach", separation.magnitude < 2);
+  void FixedUpdate() { UpdateSeagullBehaviour(); }
+
+  public void ResetWhenTakenFromPool(Vector2 position, Vector2 velocity)
+  {
+    transform.position = position;
+    _initialVelocity = velocity;
   }
 
   // Must be overridden by concrete SeagullBehaviour
-  protected abstract void StartSeagullBehaviour();
+  protected abstract void EnableSeagullBehaviour();
   protected abstract void UpdateSeagullBehaviour();
 
-  // Helpers
-  protected void SetSpriteRotationToVec2(Vector2 vec) {
-    float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
-    this.Rotation = angle;
+  // Helper
+  protected void SetSpriteRotation(Vector2 direction)
+  {
+    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+    _rigidbody2D.rotation = angle;
   }
 
-  // On trigger enter, check if other collider is player's and if so, call player's GetHit() method
-  private void OnTriggerEnter2D(Collider2D other)
+  // On trigger stay, check if other collider is player's and if so, call player's GetHit() method
+  private void OnTriggerStay2D(Collider2D other)
   {
-    Debug.Log("HELLO");
-        Debug.Log(PlayerManagerScript.Instance.PlayerGameObject.name);
-    if (other.transform.IsChildOf(PlayerManagerScript.Instance.PlayerGameObject.transform) ) {
-      PlayerManagerScript.Instance.PlayerGameObject.GetComponentInChildren<CircleScript>().GetHit(this.gameObject);
-    }
+    // If collider is not player's, return
+    if (!other.CompareTag("Player")) return;
+
+    // Call player's GetHit() method
+    PlayerManagerScript.Instance.PlayerScript.GetHit(gameObject);
   }
 }
+
+// // To delete: check if player is within some distance, and if so, toggle approach animation
+// Vector2 separation = PlayerManagerScript.Instance.GetPlayerPosition() - Position;
+// _animator.SetBool("Approach", separation.magnitude < 2);

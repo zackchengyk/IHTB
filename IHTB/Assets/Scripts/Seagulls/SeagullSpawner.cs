@@ -1,30 +1,39 @@
 using UnityEngine;
 
+// This corresponds to an actual thing that scrolls with the screen
 public abstract class SeagullSpawner : MonoBehaviour
 {
   // Things to be set when creating the prefab corresponding to the concrete SeagullSpawner
-  [SerializeField] protected GameObject _seagull; 
-  [SerializeField] protected GameObject _spawner;
+  [SerializeField] protected SeagullIndex _seagullindex;
 
-  // TODO: make some kind of scroll manager which provides this
-  protected Vector2 scrollVelocity = new Vector2(0, -1);
+  protected Rigidbody2D _rigidbody2D;
 
-  // Start is called before the first frame update
-  void Start()
-  {
-    this.StartSeagullSpawner();
+  void Awake() { _rigidbody2D = GetComponentInChildren<Rigidbody2D>(); }
 
-    // TODO: there has to be a better way to do this (make the spawner scroll downward)
-    this._spawner.GetComponentInChildren<Rigidbody2D>().velocity = scrollVelocity;
-  }
+  void OnEnable() { EnableSeagullSpawner(); }
 
-  // Update is called once per frame
   void Update()
   {
-    this.UpdateSeagullSpawner();
+    // Update velocity
+    _rigidbody2D.velocity = ScrollManagerScript.Instance.ScrollVelocity;
+
+    // Call the update function
+    UpdateSeagullSpawner();
   }
 
+  void OnDisable() { DisableSeagullSpawner(); }
+
   // Must be overridden by concrete SeagullSpawner
-  protected abstract void StartSeagullSpawner();
+  protected abstract void EnableSeagullSpawner();
   protected abstract void UpdateSeagullSpawner();
+  protected abstract void DisableSeagullSpawner();
+
+  // Helper
+  protected void SpawnSeagull(Vector3 position, Vector3 velocity)
+  {
+    GameObject obj = ObjectPooler.Instance.GetPooledObject(_seagullindex);
+
+    obj.GetComponent<SeagullBehaviour>().ResetWhenTakenFromPool(position, velocity);
+    obj.SetActive(true);
+  }
 }

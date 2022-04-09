@@ -3,33 +3,29 @@ using UnityEngine;
 // Todo
 public class CurvedBehaviour : SeagullBehaviour
 {
-  private float radiansPerTime = 2.0f;
+  // Keep track of turning rate
+  private float _radiansPerTime = Mathf.PI * 3 / 4;
 
-  protected override void StartSeagullBehaviour()
+  protected override void EnableSeagullBehaviour()
   {
-    // Set initial velocity
-    this.Velocity = this.initialVelocity;
-
-    // Set rotation direction
-    if (Random.value < 0.5) {
-      this.radiansPerTime *= -1;
+    // Select future rotation direction
+    if (Random.value < 0.5)
+    {
+      _radiansPerTime *= -1;
     }
   }
 
   protected override void UpdateSeagullBehaviour()
   {
-    this.radiansPerTime = this.radiansPerTime * (1.0f - 0.5f * Time.deltaTime);
+    // Decrease rotation with time
+    _radiansPerTime = _radiansPerTime * (1.0f - 0.5f * Time.deltaTime);
 
     // Set velocity
-    Vector2 newDirection = Rotate(this.Velocity, Time.deltaTime * this.radiansPerTime);
-    this.Velocity = newDirection;
-
-    // Set transform rotation
-    SetSpriteRotationToVec2(newDirection.normalized);
+    Velocity = rotateCCW(Velocity, Time.deltaTime * _radiansPerTime);
   }
 
   // Helper
-  public static Vector2 Rotate(Vector2 v, float delta)
+  private Vector2 rotateCCW(Vector2 v, float delta)
   {
     return new Vector2(
         v.x * Mathf.Cos(delta) - v.y * Mathf.Sin(delta),

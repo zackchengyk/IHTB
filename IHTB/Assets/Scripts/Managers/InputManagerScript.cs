@@ -8,7 +8,8 @@ public class InputManagerScript : MonoBehaviour
 
 	[HideInInspector] public Vector2 Movement;
 	[HideInInspector] public bool Pausing = false;
-	[HideInInspector] public bool FineMovement = false;
+	[HideInInspector] public bool DodgeRoll = false;
+	// [HideInInspector] public bool FineMovement = false;
 
   void Awake()
   {
@@ -21,25 +22,26 @@ public class InputManagerScript : MonoBehaviour
     Movement = context.ReadValue<Vector2>();
   }
 
-  // Press to toggle pause 
+  // Press to toggle pause
 	public void OnPauseInput(InputAction.CallbackContext context)
   {
     if (context.started)
     { 
-      Pausing = !Pausing; 
+      Pausing = !Pausing;
+      Time.timeScale = Pausing ? 0 : 1;
     }
   }
 
-  // Hold to toggle fine movement
-	public void onFineModifierInput(InputAction.CallbackContext context)
+  // Press/Hold to trigger dodge rolls
+	public void onDodgeRollInput(InputAction.CallbackContext context)
   {
     if (context.started)
     {
-      FineMovement = true;
+      DodgeRoll = true;
     }
     else if (context.canceled)
     {
-      FineMovement = false;
+      DodgeRoll = false;
     }
   }
 }
