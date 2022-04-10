@@ -28,40 +28,78 @@ public class ArrowHead : MonoBehaviour
 
   [SerializeField] private float _deathDuration = 1f;
 
+  // ================== Methods
+
   void Awake()
   {
     _rigidbody2D = GetComponent<Rigidbody2D>();
     _animator = GetComponentInChildren<Animator>();
   }
-  // Start is called before the first frame update
+
   void Start()
   {
     _livesSystem.DisplayLives(_currentHP, _maxHP);
   }
 
-  // FixedUpdate may be called any number of times per frame
+
   void FixedUpdate()
   {
     // If the game is paused, or the player is rolling or dead, do not update
-    if (InputManagerScript.Instance.Pausing || _isRolling || _isDead) return;
+    if (InputManager.Instance.Pausing || _isRolling || _isDead) return;
 
     // Start roll if requested
     if (_canRoll &&
-        InputManagerScript.Instance.DodgeRoll && 
-        InputManagerScript.Instance.Movement.sqrMagnitude > 0)
+        InputManager.Instance.DodgeRoll && 
+        InputManager.Instance.Movement.sqrMagnitude > 0)
     {
       StartCoroutine(roll());
       return;
     }
     
     // Update velocity
-    _rigidbody2D.velocity = InputManagerScript.Instance.Movement * _speed;
+    _rigidbody2D.velocity = InputManager.Instance.Movement * _speed;
 
     // Update running animation state(s)
     updateRunningAnimationStates();
   }
 
-  // Helper for FixedUpdate
+  // This is called when a projectile hits the player
+  public void GetHit(GameObject projectile)
+  {
+    // If the player is dead, do not get hit
+    if (_isDead) return;
+
+    // Make seagull take fry
+    projectile.GetComponent<SeagullBehaviour>().FryTaken = true;
+
+    // Decrement HP
+    _currentHP--;
+    _livesSystem.DisplayLives(_currentHP, _maxHP);
+
+    // Shake screen
+    ShakerManager.Instance.ShakeOnceNonLinearRealtime(
+      _hitShakeDurationRealtime,
+      _hitShakeFrequencyScale,
+      _hitShakeAmplitudeScale);
+
+    // Die
+    if (_currentHP == 0)
+    {
+      StartCoroutine(die());
+      return;
+    }
+    
+    // Slow time temporarily
+    TimeManager.Instance.SlowTimeNonLinearRealtime(_hitTimeScale, _hitShakeDurationRealtime);
+
+    // Create invulnerability period (may be less or more than shake duration)
+    StopCoroutine (startInvulnerabilityPeriodRealtime());
+    StartCoroutine(startInvulnerabilityPeriodRealtime());
+  }
+
+  // ================== Helpers
+
+  // This is used in FixedUpdate
   private void updateRunningAnimationStates()
   {
     // Set isRunning
@@ -80,43 +118,7 @@ public class ArrowHead : MonoBehaviour
     else                                    _animator.SetInteger("runningDirection", 3);
   }
 
-  // GetHit is called when a projectile hits the player
-  public void GetHit(GameObject projectile)
-  {
-    // If the player is dead, do not get hit
-    if (_isDead) return;
-
-    // Make seagull take fry
-    projectile.GetComponent<SeagullBehaviour>().FryTaken = true;
-
-    // Decrement HP
-    _currentHP--;
-    _livesSystem.DisplayLives(_currentHP, _maxHP);
-
-    // Shake screen
-    ShakerManagerScript.Instance.ShakeOnceNonLinearRealtime(
-      _hitShakeDurationRealtime,
-      _hitShakeFrequencyScale,
-      _hitShakeAmplitudeScale);
-
-    // Die
-    if (_currentHP == 0)
-    {
-      StartCoroutine(die());
-      return;
-    }
-    
-    // Slow time temporarily
-    TimeManagerScript.Instance.SlowTimeNonLinearRealtime(_hitTimeScale, _hitShakeDurationRealtime);
-
-    // Create invulnerability period (may be less or more than shake duration)
-    StopCoroutine (startInvulnerabilityPeriodRealtime());
-    StartCoroutine(startInvulnerabilityPeriodRealtime());
-  }
-
-  /* Helper coroutines */
-
-  // Execute a roll
+  // This executes a roll
   private IEnumerator roll()
   {
     _isRolling = true;
@@ -125,7 +127,7 @@ public class ArrowHead : MonoBehaviour
 
     _animator.SetTrigger("rollTrigger");
     _animator.speed = 1 / _rollDuration;
-    _rigidbody2D.velocity = InputManagerScript.Instance.Movement * _rollSpeedMultiplier * _speed;
+    _rigidbody2D.velocity = InputManager.Instance.Movement * _rollSpeedMultiplier * _speed;
 
     yield return new WaitForSeconds(_rollDuration);
 
@@ -139,7 +141,7 @@ public class ArrowHead : MonoBehaviour
     _canRoll = true;
   }
 
-  // Become temporarily invulnerable
+  // This makes the player temporarily invulnerable
   private IEnumerator startInvulnerabilityPeriodRealtime()
   {
     _invulnerable = true;
@@ -155,14 +157,14 @@ public class ArrowHead : MonoBehaviour
     _animator.SetBool("invulnerable", false);
   }
 
-  // Todo: die
+  // This is called when the player dies
   private IEnumerator die()
   {
     _isDead = true;
     _rigidbody2D.velocity = Vector2.zero;
 
-    PlayerManagerScript.Instance.PlayerIsAlive = false;
-    ScrollManagerScript.Instance.ScrollVelocity = Vector2.zero;
+    PlayerManager.Instance.PlayerIsAlive = false;
+    ScrollManager.Instance.ScrollVelocity = Vector2.zero;
 
     _animator.SetTrigger("deathTrigger");
     _animator.speed = 1 / _deathDuration;

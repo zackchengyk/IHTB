@@ -24,16 +24,17 @@ public enum Edge : int
   bottomOnly = 1,
   leftOnly   = 2,
   rightOnly  = 3,
-  any        = 4, 
+  any        = 4,
 }
 
-public class SeagullManagerScript : MonoBehaviour
+[DisallowMultipleComponent]
+public class SeagullManager : MonoBehaviour
 {
-  public static SeagullManagerScript Instance;
+  public static SeagullManager Instance;
 
-  private Vector2 _screenDimensions;
-  private IngressorType currIngressorType;
-  private IngressorType nextIngressorType;
+  private Vector2       _screenDimensions;
+  private IngressorType _currIngressorType;
+  private IngressorType _nextIngressorType;
 
   // Accessors
   public Vector2 ScreenDimensions { get { return _screenDimensions; } }
@@ -44,18 +45,18 @@ public class SeagullManagerScript : MonoBehaviour
   {
     _screenDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
 
-    nextIngressorType = getNextIngressorType();
+    _nextIngressorType = get_NextIngressorType();
 
     StartCoroutine(enterIngressors());
   }
 
   private IEnumerator enterIngressors()
   {
-    while (PlayerManagerScript.Instance.PlayerIsAlive)
+    while (PlayerManager.Instance.PlayerIsAlive)
     {
       // Select next ingressor
-      currIngressorType = nextIngressorType;
-      nextIngressorType = getNextIngressorType();
+      _currIngressorType = _nextIngressorType;
+      _nextIngressorType = get_NextIngressorType();
       float waitTime = getWaitTime();
 
       // Call appropriate ingressor
@@ -68,18 +69,18 @@ public class SeagullManagerScript : MonoBehaviour
 
   // ================== Helpers
 
-  private IngressorType getNextIngressorType()
+  private IngressorType get_NextIngressorType()
   {
     return (IngressorType) Random.Range(0, 2);
   }
 
   private float getWaitTime()
   {
-    switch (currIngressorType)
+    switch (_currIngressorType)
     {
       case IngressorType.Spawner:
       {
-        switch (nextIngressorType)
+        switch (_nextIngressorType)
         {
           case IngressorType.Spawner: return Random.Range(0.25f, 2f);
           case IngressorType.Wall:    return Random.Range(2.5f,  5f);
@@ -88,7 +89,7 @@ public class SeagullManagerScript : MonoBehaviour
       }
       case IngressorType.Wall:
       {
-        switch (nextIngressorType)
+        switch (_nextIngressorType)
         {
           case IngressorType.Spawner: return Random.Range(0.25f, 2f);
           case IngressorType.Wall:    return Random.Range(3f, 4f);
@@ -97,7 +98,7 @@ public class SeagullManagerScript : MonoBehaviour
       }
       default:
       {
-        switch (nextIngressorType)
+        switch (_nextIngressorType)
         {
           case IngressorType.Spawner: return Random.Range(0.25f, 2f);
           case IngressorType.Wall:    return Random.Range(0.25f, 2f);
@@ -109,7 +110,7 @@ public class SeagullManagerScript : MonoBehaviour
 
   private void callCurrentIngressor()
   {
-    switch (currIngressorType)
+    switch (_currIngressorType)
     {
       case IngressorType.Spawner:
       {
@@ -124,7 +125,7 @@ public class SeagullManagerScript : MonoBehaviour
         WallIngressor.Instance.IngressMultiWall(
           edge: Edge.topOnly,
           wallSpacing: Random.Range(2, 4),
-          wallVelocity: ScrollManagerScript.Instance.ScrollVelocity,
+          wallVelocity: ScrollManager.Instance.ScrollVelocity,
           wallCount: Random.Range(2, 4));
         return;
       }

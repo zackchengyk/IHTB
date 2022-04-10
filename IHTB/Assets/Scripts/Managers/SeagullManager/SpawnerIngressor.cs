@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class SpawnerIngressor : MonoBehaviour
 {
   public static SpawnerIngressor Instance;
+
+  // ================== Methods
   
   void Awake() { Instance = this; }
 

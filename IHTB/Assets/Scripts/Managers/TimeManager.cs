@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeManagerScript : MonoBehaviour
+[DisallowMultipleComponent]
+public class TimeManager : MonoBehaviour
 {
-  public static TimeManagerScript Instance;
+  public static TimeManager Instance;
 
-  // Awake is called before the first frame update, whether enabled or not
-  void Awake()
-  {
-    Instance = this;
-  }
+  // ================== Methods
+
+  void Awake() { Instance = this; }
 
   // Starts a coroutine to manage a temporary timescale change in real time
   public void SlowTimeNonLinearRealtime(float minTimeScale, float realDuration)
@@ -18,12 +17,11 @@ public class TimeManagerScript : MonoBehaviour
     StopAllCoroutines();
     StartCoroutine(slowTimeNonLinearRealtime(minTimeScale, realDuration));
   }
+
+  // ================== Helpers
+
   private IEnumerator slowTimeNonLinearRealtime(float minTimeScale, float realDuration)
   {
-    // Time.timeScale = minTimeScale;
-    // yield return new WaitForSecondsRealtime(realDuration);
-    // Time.timeScale = 1f;
-
     float startTime = Time.realtimeSinceStartup;
     float endTime = startTime + realDuration;
 

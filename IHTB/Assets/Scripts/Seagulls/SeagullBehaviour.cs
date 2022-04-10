@@ -2,12 +2,15 @@ using UnityEngine;
 
 public abstract class SeagullBehaviour : MonoBehaviour
 {
-  // Things that are internal
   private Rigidbody2D _rigidbody2D;
-  private Animator _animator;
-  private Vector2 _initialVelocity;
+  private Animator    _animator;
+  private Vector2     _initialVelocity; // this is necessary because Rigidbody2D properties
+                                        // can't be set until after the object is enabled;
+                                        // however, _initialPosition is not necessary because the
+                                        // Rigidbody2D acquires its position from transform.position
   
-  // Accessors
+  // ================== Accessors
+
   public bool FryTaken
   {
     get { return _animator.GetBool("FryTaken"); }
@@ -27,6 +30,8 @@ public abstract class SeagullBehaviour : MonoBehaviour
     }
   }
 
+  // ================== Methods
+  
   void Awake()
   {
     _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -52,7 +57,7 @@ public abstract class SeagullBehaviour : MonoBehaviour
   // On trigger stay, check if other collider is player's and if so, call player's GetHit() method
   void OnTriggerStay2D(Collider2D other)
   {
-    if (other.CompareTag("Player")) PlayerManagerScript.Instance.PlayerScript.GetHit(gameObject);
+    if (other.CompareTag("Player")) PlayerManager.Instance.PlayerScript.GetHit(gameObject);
   }
 
   // Must be overridden by concrete SeagullBehaviour
@@ -60,10 +65,16 @@ public abstract class SeagullBehaviour : MonoBehaviour
   protected abstract void UpdateSeagullBehaviour();
   protected abstract void DisableSeagullBehaviour();
 
-  // Helper
+  // ================== Helpers
+
   protected void SetSpriteRotation(Vector2 direction)
   {
     float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
     _rigidbody2D.rotation = angle;
+  }
+
+  protected Vector2 getNormalizedDirectionToPlayer()
+  {
+    return (PlayerManager.Instance.PlayerPosition - Position).normalized;
   }
 }

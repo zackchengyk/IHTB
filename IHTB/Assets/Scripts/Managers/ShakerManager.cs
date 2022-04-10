@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShakerManagerScript : MonoBehaviour
+[DisallowMultipleComponent]
+public class ShakerManager : MonoBehaviour
 {
-  public static ShakerManagerScript Instance;
+  public static ShakerManager Instance;
 
   [Tooltip("The thing to shake.")]
   [SerializeField] private Transform _target;
@@ -18,18 +19,14 @@ public class ShakerManagerScript : MonoBehaviour
   [SerializeField] private float   _defaultFrequencyScale = 15f;
   [SerializeField] private Vector2 _defaultAmplitudeScale = Vector2.one / 4;
 
-  // Internal use
   private float   _frequencyScale;
   private Vector2 _amplitudeScale;
-  private float   _currMultiplier;
+  private float   _currMultiplier; // this modulates the magnitude of the shake with time
 
-  // Awake is called before the first frame update, whether enabled or not
-  void Awake()
-  {
-    Instance = this;
-  }
+  // ================== Methods
 
-  // Update is called once per frame
+  void Awake() { Instance = this; }
+
   void Update()
   {
     // Get a displacement vector
@@ -42,14 +39,7 @@ public class ShakerManagerScript : MonoBehaviour
     _target.localPosition = _neutral + (Vector3) displacement;
   }
 
-  // Call either of these to shake the screen
-  public void ShakeOnceNonLinearRealtime(float realDuration, float frequencyScale, Vector2 amplitudeScale)
-  {
-    _frequencyScale = frequencyScale;
-    _amplitudeScale = amplitudeScale;
-    StopAllCoroutines();
-    StartCoroutine(shakeOnceNonLinearRealtime(realDuration));
-  }
+  // Call either of these to actually shake the screen
   public void ShakeOnceNonLinearRealtime(float realDuration)
   {
     _frequencyScale = _defaultFrequencyScale;
@@ -57,15 +47,24 @@ public class ShakerManagerScript : MonoBehaviour
     StopAllCoroutines();
     StartCoroutine(shakeOnceNonLinearRealtime(realDuration));
   }
+  public void ShakeOnceNonLinearRealtime(float realDuration, float frequencyScale, Vector2 amplitudeScale)
+  {
+    _frequencyScale = frequencyScale;
+    _amplitudeScale = amplitudeScale;
+    StopAllCoroutines();
+    StartCoroutine(shakeOnceNonLinearRealtime(realDuration));
+  }
 
-  // Helper coroutine. It is responsible for setting enabled and _currMultiplier.
+  // ================== Helpers
+
+  // This is responsible for enabling the script, and changing _currMultiplier with time
   private IEnumerator shakeOnceNonLinearRealtime(float realDuration)
   {
     enabled = true;
     _currMultiplier = 1f;
 
     float startTime = Time.realtimeSinceStartup;
-    float endTime = startTime + realDuration;
+    float endTime   = startTime + realDuration;
 
     while (Time.realtimeSinceStartup < endTime)
     {
@@ -83,7 +82,7 @@ public class ShakerManagerScript : MonoBehaviour
     _currMultiplier = 0f;
   }
 
-  // Helper to return a noise Vector2 with x and y ranging from -1 to 1.
+  // This returns a noise Vector2 with x and y ranging from -1 to 1.
   private Vector2 getNoise(float time)
   {
     return 2f * new Vector2(
@@ -91,7 +90,7 @@ public class ShakerManagerScript : MonoBehaviour
       Mathf.PerlinNoise(time, _seed.y) - 0.5f);
   }
 
-  // Updates _neutral whenever _target is changed in the Unity editor
+  // This updates _neutral whenever _target is changed in the Unity editor
 #if UNITY_EDITOR
   void OnValidate() { if (_target) _neutral = _target.localPosition; }
 #endif
