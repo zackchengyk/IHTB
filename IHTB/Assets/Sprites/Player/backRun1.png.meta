@@ -1,31 +1,43 @@
 fileFormatVersion: 2
-guid: 6e1d468521f45482d9823018801936b2
+guid: 18a3f8080c5ff43f8b179e228218854a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1831204320967005281
-    second: arrowHeadSprite_Left0
+      213: -6675687856666445435
+    second: backRun1_0
   - first:
-      213: -1313478034459625201
-    second: arrowHeadSprite_Left1
+      213: -2999226968122769619
+    second: backRun1_1
   - first:
-      213: -8000656484272889866
-    second: arrowHeadSprite_Right0
+      213: 1723773989772997404
+    second: backRun1_2
   - first:
-      213: 8153860370483782122
-    second: arrowHeadSprite_Right1
+      213: -7765874089368063770
+    second: backRun1_3
   - first:
-      213: 3528231746724534747
-    second: arrowHeadSprite_Down0
+      213: 2688146527968789454
+    second: backRun1_4
   - first:
-      213: 7646669893503083221
-    second: arrowHeadSprite_Down1
+      213: 9163094917304441840
+    second: backRun1_5
   - first:
-      213: 8418347886951008258
-    second: arrowHeadSprite_Up0
+      213: -5863863015623385997
+    second: backRun1_6
   - first:
-      213: -4580241557814956011
-    second: arrowHeadSprite_Up1
+      213: -22592102164799870
+    second: backRun1_7
+  - first:
+      213: -5797620483364491342
+    second: backRun1_8
+  - first:
+      213: -9057306712244599919
+    second: backRun1_9
+  - first:
+      213: 4221234932739249743
+    second: backRun1_10
+  - first:
+      213: 7632856193903672632
+    second: backRun1_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -56,7 +68,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -70,7 +82,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 8
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -115,169 +127,253 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: arrowHeadSprite_Left0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 16
-        width: 15
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f9be9994f514696e0800000000000000
-      internalID: -1831204320967005281
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: arrowHeadSprite_Left1
+      name: backRun1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 15
-        height: 15
+        width: 200
+        height: 380
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f0971cfcfa695cde0800000000000000
-      internalID: -1313478034459625201
+      spriteID: 589f10083413b53a0800000000000000
+      internalID: -6675687856666445435
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: arrowHeadSprite_Right0
+      name: backRun1_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
-        width: 15
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6ff1dfc1155f7f090800000000000000
-      internalID: -8000656484272889866
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: arrowHeadSprite_Right1
-      rect:
-        serializedVersion: 2
-        x: 16
+        x: 200
         y: 0
-        width: 15
-        height: 15
+        width: 200
+        height: 380
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae122d25ec4582170800000000000000
-      internalID: 8153860370483782122
+      spriteID: d2f354c86fa9066d0800000000000000
+      internalID: -2999226968122769619
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: arrowHeadSprite_Down0
+      name: backRun1_2
       rect:
         serializedVersion: 2
-        x: 32
-        y: 16
-        width: 15
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bd995cc841cc6f030800000000000000
-      internalID: 3528231746724534747
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: arrowHeadSprite_Down1
-      rect:
-        serializedVersion: 2
-        x: 32
+        x: 400
         y: 0
-        width: 15
-        height: 15
+        width: 200
+        height: 380
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d2ecec11cd6e1a60800000000000000
-      internalID: 7646669893503083221
+      spriteID: c133a7d8f431ce710800000000000000
+      internalID: 1723773989772997404
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: arrowHeadSprite_Up0
+      name: backRun1_3
       rect:
         serializedVersion: 2
-        x: 48
-        y: 16
-        width: 15
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 20800650dcaf3d470800000000000000
-      internalID: 8418347886951008258
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: arrowHeadSprite_Up1
-      rect:
-        serializedVersion: 2
-        x: 48
+        x: 600
         y: 0
-        width: 15
-        height: 15
+        width: 200
+        height: 380
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51035f00296bf60c0800000000000000
-      internalID: -4580241557814956011
+      spriteID: 6e07ecc39a21a3490800000000000000
+      internalID: -7765874089368063770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: backRun1_4
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 200
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec387c756073e4520800000000000000
+      internalID: 2688146527968789454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: backRun1_5
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 0
+        width: 200
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fb5e15774ad92f70800000000000000
+      internalID: 9163094917304441840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: backRun1_6
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 200
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37c9736c7af5f9ea0800000000000000
+      internalID: -5863863015623385997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: backRun1_7
+      rect:
+        serializedVersion: 2
+        x: 1400
+        y: 0
+        width: 200
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28edcbf4a9cbfaff0800000000000000
+      internalID: -22592102164799870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: backRun1_8
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 0
+        width: 200
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bfe78233e6ba8fa0800000000000000
+      internalID: -5797620483364491342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: backRun1_9
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 0
+        width: 200
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19346ea688bfd4280800000000000000
+      internalID: -9057306712244599919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: backRun1_10
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 0
+        width: 200
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4694676ec6d49a30800000000000000
+      internalID: 4221234932739249743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: backRun1_11
+      rect:
+        serializedVersion: 2
+        x: 2200
+        y: 0
+        width: 200
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83db44b844a5de960800000000000000
+      internalID: 7632856193903672632
       vertices: []
       indices: 
       edges: []
