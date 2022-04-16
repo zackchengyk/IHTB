@@ -23,10 +23,10 @@ public class PlayerScript : MonoBehaviour
   void Update()
   {
     // If the game is paused, return
-    if (InputManagerScript.Instance.Pausing) return;
+    if (InputManager.Instance.Pausing) return;
     
     // Update velocity
-    circle.velocity = InputManagerScript.Instance.Movement * speed;
+    circle.velocity = InputManager.Instance.Movement * speed;
   }
 
   // GetHit is called when a projectile hits the player

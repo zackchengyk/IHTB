@@ -21,7 +21,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        InputManagerScript.Instance.Pausing = false;
+        InputManager.Instance.Pausing = false;
     }
 
     
@@ -29,7 +29,7 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(InputManagerScript.Instance.Pausing)
+        if(InputManager.Instance.Pausing)
         {
             pauseMenu.SetActive(true);
             resumeBtn.SetActive(true);

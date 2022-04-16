@@ -2,35 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SeagullIndex : int
-{
-  Linear = 0,
-  Curved = 1,
-  Sniper = 2,
-  Homing = 3,
-}
-
 [System.Serializable]
-public class ObjectPoolItem {
+public class ObjectPoolItem
+{
   public GameObject objectToPool;
   public int initialAmount;
 }
 
-public class ObjectPooler : MonoBehaviour {
-
+[DisallowMultipleComponent]
+public class ObjectPooler : MonoBehaviour
+{
 	public static ObjectPooler Instance;
 
   [SerializeField] private List<ObjectPoolItem> _itemsToPool;
 
   private List<List<GameObject>> _pooledObjects;
 
-	void Awake() {
-		Instance = this;
-	}
+	// ================== Methods
+  
+	void Awake() { Instance = this; }
 
-	// Start is called before the first frame update
-  void Start () {
-
+  void Start ()
+  {
     _pooledObjects = new List<List<GameObject>>();
     
     // For each type of thing to pool
@@ -48,8 +41,8 @@ public class ObjectPooler : MonoBehaviour {
       }
     }
   }
-	
-  // Caller's responsibility to set active to true!
+
+  // Note: it's the caller's responsibility to activate the GameObject
   public GameObject GetPooledObject(SeagullIndex seagullindex)
   {
     int index = (int)seagullindex;
@@ -70,6 +63,7 @@ public class ObjectPooler : MonoBehaviour {
     GameObject obj = Instantiate(_itemsToPool[index].objectToPool) as GameObject;
     obj.SetActive(false);
     _pooledObjects[index].Add(obj);
+
     return obj;
   }
 }

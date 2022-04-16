@@ -2,21 +2,27 @@ using UnityEngine;
 
 public abstract class SeagullBehaviour : MonoBehaviour
 {
-  // Things that are internal
   private Rigidbody2D _rigidbody2D;
-  private Animator _animator;
-  private Vector2 _initialVelocity;
+  private Animator    _animator;
+  private Vector2     _initialVelocity; // this is necessary because Rigidbody2D properties
+                                        // can't be set until after the object is enabled;
+                                        // however, _initialPosition is not necessary because the
+                                        // Rigidbody2D acquires its position from transform.position
   
-  // Accessors
-  public bool FryTaken {
+  // ================== Accessors
+
+  public bool FryTaken
+  {
     get { return _animator.GetBool("FryTaken"); }
     set { _animator.SetBool("FryTaken", value); }
   }
-  public Vector2 Position {
+  public Vector2 Position
+  {
     get { return _rigidbody2D.position; }
     set { _rigidbody2D.position = value; }
   }
-  public Vector2 Velocity {
+  public Vector2 Velocity
+  {
     get { return _rigidbody2D.velocity; }
     set {
       _rigidbody2D.velocity = value;
@@ -24,19 +30,23 @@ public abstract class SeagullBehaviour : MonoBehaviour
     }
   }
 
+  // ================== Methods
+  
   void Awake()
   {
     _rigidbody2D = GetComponent<Rigidbody2D>();
-    Debug.Log(_rigidbody2D);
-    _animator = GetComponentInChildren<Animator>();
+    _animator    = GetComponentInChildren<Animator>();
   }
 
-  void OnEnable() {
+  void OnEnable()
+  {
     Velocity = _initialVelocity;
     EnableSeagullBehaviour();
   }
 
   void FixedUpdate() { UpdateSeagullBehaviour(); }
+
+  void onDisable() { DisableSeagullBehaviour(); }
 
   public void ResetWhenTakenFromPool(Vector2 position, Vector2 velocity)
   {
@@ -44,28 +54,27 @@ public abstract class SeagullBehaviour : MonoBehaviour
     _initialVelocity = velocity;
   }
 
+  // On trigger stay, check if other collider is player's and if so, call player's GetHit() method
+  void OnTriggerStay2D(Collider2D other)
+  {
+    if (other.CompareTag("Player")) PlayerManager.Instance.PlayerScript.GetHit(gameObject);
+  }
+
   // Must be overridden by concrete SeagullBehaviour
   protected abstract void EnableSeagullBehaviour();
   protected abstract void UpdateSeagullBehaviour();
+  protected abstract void DisableSeagullBehaviour();
 
-  // Helper
+  // ================== Helpers
+
   protected void SetSpriteRotation(Vector2 direction)
   {
     float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
     _rigidbody2D.rotation = angle;
   }
 
-  // On trigger stay, check if other collider is player's and if so, call player's GetHit() method
-  private void OnTriggerStay2D(Collider2D other)
+  protected Vector2 getNormalizedDirectionToPlayer()
   {
-    // If collider is not player's, return
-    if (!other.CompareTag("Player")) return;
-
-    // Call player's GetHit() method
-    PlayerManagerScript.Instance.PlayerScript.GetHit(gameObject);
+    return (PlayerManager.Instance.PlayerPosition - Position).normalized;
   }
 }
-
-// // To delete: check if player is within some distance, and if so, toggle approach animation
-// Vector2 separation = PlayerManagerScript.Instance.GetPlayerPosition() - Position;
-// _animator.SetBool("Approach", separation.magnitude < 2);

@@ -3,28 +3,33 @@ using UnityEngine;
 // Todo
 public class CurvedBehaviour : SeagullBehaviour
 {
-  // Keep track of turning rate
-  private float _radiansPerTime = Mathf.PI * 3 / 4;
+  private const float _initialRadiansPerTime = Mathf.PI * 3 / 4; // this limits the turning rate;
+  private float _radiansPerTime;                                 // it will be decreased with time
+
+  // ================== Methods
 
   protected override void EnableSeagullBehaviour()
   {
-    // Select future rotation direction
-    if (Random.value < 0.5)
-    {
-      _radiansPerTime *= -1;
-    }
+    // Set initial turning rate
+    _radiansPerTime = _initialRadiansPerTime;
+
+    // Select future turning direction
+    if (Random.value < 0.5) _radiansPerTime *= -1;
   }
 
   protected override void UpdateSeagullBehaviour()
   {
-    // Decrease rotation with time
+    // Decrease turning rate with time
     _radiansPerTime = _radiansPerTime * (1.0f - 0.5f * Time.deltaTime);
 
     // Set velocity
     Velocity = rotateCCW(Velocity, Time.deltaTime * _radiansPerTime);
   }
 
-  // Helper
+  protected override void DisableSeagullBehaviour() {}
+
+  // ================== Helpers
+
   private Vector2 rotateCCW(Vector2 v, float delta)
   {
     return new Vector2(
