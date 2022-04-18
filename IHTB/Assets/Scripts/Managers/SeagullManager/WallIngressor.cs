@@ -28,13 +28,14 @@ public class WallIngressor : MonoBehaviour
       wallVelocity);
   }
 
-  public void IngressMultiWall(
+  public float IngressMultiWall(
     Edge    edge,
     float   wallSpacing,
     Vector2 wallVelocity,
     int     wallCount)
   {
     StartCoroutine(ingressMultiWallHelper(edge, wallSpacing, wallVelocity, wallCount));
+    return 1.0f;
   }
   
   // ================== Helpers
@@ -62,7 +63,7 @@ public class WallIngressor : MonoBehaviour
     
     switch (edge)
     {
-      case Edge.leftOnly:
+      case Edge.LeftOnly:
       {
         tuple.center = new Vector2(-screenDimensions.x, 0);
         tuple.parallel = Vector2.up;

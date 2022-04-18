@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -50
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -93,9 +93,8 @@ GameObject:
   - component: {fileID: 8499774255021193685}
   - component: {fileID: 208193453501868059}
   - component: {fileID: 4423025255570053119}
-  - component: {fileID: 1551288210157385199}
   m_Layer: 7
-  m_Name: NullRandomSpawner
+  m_Name: NullSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,19 +152,3 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &1551288210157385199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8499774255021193686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2003e0317525d489a85c80e5546f9fca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _seagullindex: 0
-  _spawnDelay: 0
-  _spawnPeriod: 0.75
-  _spawnInitialSpeed: 2.5

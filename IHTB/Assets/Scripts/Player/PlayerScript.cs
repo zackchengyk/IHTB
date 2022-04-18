@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// To delete
+
 public class PlayerScript : MonoBehaviour
 {
   [SerializeField] public Rigidbody2D circle;
@@ -12,12 +14,13 @@ public class PlayerScript : MonoBehaviour
   [SerializeField] LivesSystem livesSystem;
 
   // Start is called before the first frame update
-  void Start() {
-        this.initialPosition = this.transform.position;
-        Debug.Log("player position: " + this.initialPosition);
+  void Start()
+  {
+    this.initialPosition = this.transform.position;
+    Debug.Log("player position: " + this.initialPosition);
 
-        this.livesSystem.DisplayLives(3, 3);
-    }
+    this.livesSystem.DisplayLives(3, 3);
+  }
 
   // Update is called once per frame
   void Update()

@@ -9,7 +9,7 @@ public class RandomDirectionSpawner : SeagullSpawner
     InvokeRepeating("SpawnRandomDirectionSeagull", _spawnDelay, _spawnPeriod);
   }
 
-  protected override void UpdateSeagullSpawner() {}
+  protected override void UpdateSeagullSpawner(float deltaTime) {}
 
   protected override void DisableSeagullSpawner() { CancelInvoke(); }
 

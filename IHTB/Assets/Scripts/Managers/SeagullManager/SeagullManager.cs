@@ -11,22 +11,6 @@ public enum SeagullIndex : int
   RandomSpawner = 4,
 }
 
-public enum IngressorType : int
-{
-  Spawner = 0,
-  Wall    = 1,
-  Random  = 2,
-}
-
-public enum Edge : int
-{
-  topOnly    = 0,
-  bottomOnly = 1,
-  leftOnly   = 2,
-  rightOnly  = 3,
-  any        = 4,
-}
-
 [DisallowMultipleComponent]
 public class SeagullManager : MonoBehaviour
 {
@@ -36,18 +20,33 @@ public class SeagullManager : MonoBehaviour
   private IngressorType _currIngressorType;
   private IngressorType _nextIngressorType;
 
-  // Accessors
+  private float _difficulty;
+  private float _maxDifficultyTime = 120.0f;
+  private float _startTime;
+
+  // ================== Accessors
+
   public Vector2 ScreenDimensions { get { return _screenDimensions; } }
 
+  // ================== Methods
+  
   void Awake() { Instance = this; }
 
   void Start()
   {
     _screenDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+    _nextIngressorType = getRandomIngressorType();
 
-    _nextIngressorType = get_NextIngressorType();
+    _difficulty = 0.0f;
+    _startTime = Time.time;
 
     StartCoroutine(enterIngressors());
+  }
+
+  void FixedUpdate()
+  {
+    _difficulty = Mathf.Clamp((Time.time - _startTime) / _maxDifficultyTime, 0.0f, 1.0f);
+    Debug.Log(_difficulty);
   }
 
   private IEnumerator enterIngressors()
@@ -56,100 +55,33 @@ public class SeagullManager : MonoBehaviour
     {
       // Select next ingressor
       _currIngressorType = _nextIngressorType;
-      _nextIngressorType = get_NextIngressorType();
-      float waitTime = getWaitTime();
+      _nextIngressorType = getRandomIngressorType();
 
       // Call appropriate ingressor
-      callCurrentIngressor();
+      float waitTime = callIngressor(_currIngressorType);
 
-      // Wait between ingress events
+      // Wait between ingresses
       yield return new WaitForSeconds(waitTime);
     }
   }
 
   // ================== Helpers
 
-  private IngressorType get_NextIngressorType()
-  {
-    return (IngressorType) Random.Range(0, 2);
-  }
+  private IngressorType getRandomIngressorType() { return (IngressorType) Random.Range(0, 1); }
 
-  private float getWaitTime()
+  private float callIngressor(IngressorType ingressorType)
   {
-    switch (_currIngressorType)
+    if (ingressorType == IngressorType.Random) ingressorType = getRandomIngressorType();
+    switch (ingressorType)
     {
-      case IngressorType.Spawner:
-      {
-        switch (_nextIngressorType)
-        {
-          case IngressorType.Spawner: return Random.Range(0.25f, 2f);
-          case IngressorType.Wall:    return Random.Range(2.5f,  5f);
-          default:                    return Random.Range(0.25f, 2f);
-        }
-      }
+      case IngressorType.Spawner: return SpawnerIngressor.Instance.Ingress(_difficulty);
       case IngressorType.Wall:
-      {
-        switch (_nextIngressorType)
-        {
-          case IngressorType.Spawner: return Random.Range(0.25f, 2f);
-          case IngressorType.Wall:    return Random.Range(3f, 4f);
-          default:                    return Random.Range(0.25f, 2f);
-        }
-      }
+        return WallIngressor.Instance.IngressMultiWall(edge: Edge.TopOnly,
+                                                       wallSpacing: Random.Range(2, 4),
+                                                       wallVelocity: ScrollManager.Instance.ScrollVelocity,
+                                                       wallCount: Random.Range(2, 4));
       default:
-      {
-        switch (_nextIngressorType)
-        {
-          case IngressorType.Spawner: return Random.Range(0.25f, 2f);
-          case IngressorType.Wall:    return Random.Range(0.25f, 2f);
-          default:                    return Random.Range(0.25f, 2f);
-        }
-      }
-    }
-  }
-
-  private void callCurrentIngressor()
-  {
-    switch (_currIngressorType)
-    {
-      case IngressorType.Spawner:
-      {
-        SpawnerIngressor.Instance.IngressSpawner(
-          SeagullIndex.RandomSpawner,
-          SeagullIndex.Homing,
-          getRandomPositionAlongEdge(Edge.topOnly));
-        return;
-      }
-      case IngressorType.Wall:
-      {
-        WallIngressor.Instance.IngressMultiWall(
-          edge: Edge.topOnly,
-          wallSpacing: Random.Range(2, 4),
-          wallVelocity: ScrollManager.Instance.ScrollVelocity,
-          wallCount: Random.Range(2, 4));
-        return;
-      }
-      default:
-      {
-        return;
-      }
-    }
-  }
-
-  Vector2 getRandomPositionAlongEdge(Edge edge)
-  {
-    switch (edge)
-    {
-      case Edge.topOnly:
-      {
-        return new Vector2(
-          _screenDimensions.x * Random.Range(-1f, 1f),
-          _screenDimensions.y);
-      }
-      default:
-      {
-        return Vector2.zero;
-      }
+        return 0.0f;
     }
   }
 }

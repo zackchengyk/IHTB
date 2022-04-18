@@ -11,7 +11,7 @@ public class ArrowHead : MonoBehaviour
   private bool _invulnerable = false;
   private bool _isDead = false;
 
-  [SerializeField] private float _speed = 3.5f;
+  [SerializeField] private float _speed = 4f;
   [SerializeField] private float _rollSpeedMultiplier = 1.7f;
   [SerializeField] private float _rollDuration = 0.4f;
   [SerializeField] private float _rollCooldown = 0.2f;
@@ -40,7 +40,6 @@ public class ArrowHead : MonoBehaviour
   {
     _livesSystem.DisplayLives(_currentHP, _maxHP);
   }
-
 
   void FixedUpdate()
   {

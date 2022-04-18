@@ -196,8 +196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0be11732c0c044f5abbb39130b20153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alivePrefab: {fileID: 8802398024985742347, guid: cd1dd8989e65b4214a2ce5f1fa8a57eb, type: 3}
-  deadPrefab: {fileID: 4490021135550274607, guid: fc16374c7d72240988505747bc4e554a, type: 3}
+  _alivePrefab: {fileID: 8802398024985742347, guid: cd1dd8989e65b4214a2ce5f1fa8a57eb, type: 3}
+  _deadPrefab: {fileID: 4490021135550274607, guid: fc16374c7d72240988505747bc4e554a, type: 3}
 --- !u!1 &1224851578 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6493931255120153074, guid: 3b4edb2a908654f35aeb8271597e8a73, type: 3}
@@ -392,14 +392,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6493931253223119549, guid: 3b4edb2a908654f35aeb8271597e8a73, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6493931253223119549, guid: 3b4edb2a908654f35aeb8271597e8a73, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.7
-      objectReference: {fileID: 0}
     - target: {fileID: 6493931255120153074, guid: 3b4edb2a908654f35aeb8271597e8a73, type: 3}
       propertyPath: m_Name
       value: ArrowHead
@@ -461,14 +453,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1000374750663367462, guid: 139a743ec00c4425ab8c04db38fd75bd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1602801047145110316, guid: 139a743ec00c4425ab8c04db38fd75bd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2254385803875489746, guid: 139a743ec00c4425ab8c04db38fd75bd, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -512,10 +496,6 @@ PrefabInstance:
     - target: {fileID: 2254385803875489746, guid: 139a743ec00c4425ab8c04db38fd75bd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4846854537447610637, guid: 139a743ec00c4425ab8c04db38fd75bd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5345982081287899225, guid: 139a743ec00c4425ab8c04db38fd75bd, type: 3}
       propertyPath: m_Name

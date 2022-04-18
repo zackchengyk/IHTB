@@ -355,7 +355,9 @@ MonoBehaviour:
     initialAmount: 10
   - objectToPool: {fileID: 3078196532701760327, guid: cc98d68c87f9d4b2c87015c15d32e67c, type: 3}
     initialAmount: 10
-  - objectToPool: {fileID: 8499774255021193686, guid: abe0d40074686498b9d1602f956ca7b3, type: 3}
+  - objectToPool: {fileID: 6234501849925970542, guid: bf804104684d643369d7b9dbdb5df6f0, type: 3}
+    initialAmount: 5
+  - objectToPool: {fileID: 5389010079956986587, guid: 01d5549ec41f94accb7ba910fd8e17e9, type: 3}
     initialAmount: 5
 --- !u!1 &1890623498
 GameObject:
@@ -456,7 +458,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 15}
+  m_Size: {x: 20, y: 12}
   m_EdgeRadius: 0
 --- !u!114 &2002809048
 MonoBehaviour:
