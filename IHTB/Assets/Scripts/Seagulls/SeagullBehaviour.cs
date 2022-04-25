@@ -34,7 +34,7 @@ public abstract class SeagullBehaviour : MonoBehaviour
   
   void Awake()
   {
-    _rigidbody2D = GetComponent<Rigidbody2D>();
+    _rigidbody2D = GetComponentInChildren<Rigidbody2D>();
     _animator    = GetComponentInChildren<Animator>();
   }
 
@@ -52,12 +52,6 @@ public abstract class SeagullBehaviour : MonoBehaviour
   {
     transform.position = position;
     _initialVelocity = velocity;
-  }
-
-  // On trigger stay, check if other collider is player's and if so, call player's GetHit() method
-  void OnTriggerStay2D(Collider2D other)
-  {
-    if (other.CompareTag("Player")) PlayerManager.Instance.PlayerScript.GetHit(gameObject);
   }
 
   // Must be overridden by concrete SeagullBehaviour

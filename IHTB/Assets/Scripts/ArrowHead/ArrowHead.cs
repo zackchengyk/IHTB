@@ -8,13 +8,15 @@ public class ArrowHead : MonoBehaviour
   private Animator _animator;
   private bool _isRolling = false;
   private bool _canRoll = true;
-  private bool _invulnerable = false;
+  // private bool _invulnerable = false;
   private bool _isDead = false;
 
   [SerializeField] private float _speed = 4f;
   [SerializeField] private float _rollSpeedMultiplier = 1.7f;
   [SerializeField] private float _rollDuration = 0.4f;
   [SerializeField] private float _rollCooldown = 0.2f;
+
+  private int _comboCounter = 0;
 
   [SerializeField] private int _currentHP = 3;
   [SerializeField] private int _maxHP = 3;
@@ -60,6 +62,27 @@ public class ArrowHead : MonoBehaviour
 
     // Update running animation state(s)
     updateRunningAnimationStates();
+  }
+
+  // On trigger enter, increase combo if the other collider is a projectile and the player IS rolling
+  void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.CompareTag("ProjectileWide") && _isRolling)
+    {
+      _comboCounter++;
+      Debug.Log("Combo x " + _comboCounter + "!");
+    }
+  }
+
+  // On trigger stay, get hit if the other collider is a projectile and the player IS NOT rolling
+  void OnTriggerStay2D(Collider2D other)
+  {
+    if (other.CompareTag("Projectile") && !_isRolling) 
+    {
+      GetHit(other.transform.root.gameObject);
+      _comboCounter = 0;
+      Debug.Log("Combo broken!");
+    }
   }
 
   // This is called when a projectile hits the player
@@ -121,7 +144,7 @@ public class ArrowHead : MonoBehaviour
   private IEnumerator roll()
   {
     _isRolling = true;
-    Physics2D.IgnoreLayerCollision(7, 8, true);
+    // Physics2D.IgnoreLayerCollision(7, 8, true);
     _canRoll = false;
 
     _animator.SetTrigger("rollTrigger");
@@ -131,7 +154,7 @@ public class ArrowHead : MonoBehaviour
     yield return new WaitForSeconds(_rollDuration);
 
     _isRolling = false;
-    if (!_invulnerable) Physics2D.IgnoreLayerCollision(7, 8, false);
+    // if (!_invulnerable) Physics2D.IgnoreLayerCollision(7, 8, false);
 
     _animator.speed = 1;
 
@@ -143,15 +166,16 @@ public class ArrowHead : MonoBehaviour
   // This makes the player temporarily invulnerable
   private IEnumerator startInvulnerabilityPeriodRealtime()
   {
-    _invulnerable = true;
+    // _invulnerable = true;
     Physics2D.IgnoreLayerCollision(7, 8, true);
 
     _animator.SetBool("invulnerable", true);
 
     yield return new WaitForSecondsRealtime(_hitInvulnerabilityPeriodRealtime);
 
-    _invulnerable = false;
-    if (!_isRolling) Physics2D.IgnoreLayerCollision(7, 8, false);
+    // _invulnerable = false;
+    // if (!_isRolling) Physics2D.IgnoreLayerCollision(7, 8, false);
+    Physics2D.IgnoreLayerCollision(7, 8, false);
 
     _animator.SetBool("invulnerable", false);
   }

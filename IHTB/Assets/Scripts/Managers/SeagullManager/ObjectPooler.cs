@@ -2,6 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PooledObjectIndex : int
+{
+  Linear = 0,
+  Curved = 1,
+  Sniper = 2,
+  Homing = 3,
+  ScattershotSpawner = 4,
+  PopsicleDebris = 5,
+  Rocks1Debris   = 6,
+  Rocks2Debris   = 7,
+  Seaweed1Debris = 8,
+  Seaweed2Debris = 9,
+  Shell1Debris   = 10,
+  Shell2Debris   = 11,
+  Shell3Debris   = 12,
+  SlushieDebris  = 13
+}
+
 [System.Serializable]
 public class ObjectPoolItem
 {
@@ -43,7 +61,7 @@ public class ObjectPooler : MonoBehaviour
   }
 
   // Note: it's the caller's responsibility to activate the GameObject
-  public GameObject GetPooledObject(SeagullIndex seagullindex)
+  public GameObject GetPooledObject(PooledObjectIndex seagullindex)
   {
     int index = (int)seagullindex;
 

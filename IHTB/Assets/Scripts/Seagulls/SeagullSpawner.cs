@@ -6,7 +6,7 @@ public abstract class SeagullSpawner : MonoBehaviour
   private const float _defaultSpawnPeriod = 1f;
   private const float _defaultSpawnInitialSpeed = 4f;
 
-  protected SeagullIndex _seagullIndex; // the index of the type of seagull this spawner spawns
+  protected PooledObjectIndex _seagullIndex; // the index of the type of seagull this spawner spawns
   protected float _spawnDelay;
   protected float _spawnPeriod;
   protected float _spawnInitialSpeed;
@@ -36,7 +36,7 @@ public abstract class SeagullSpawner : MonoBehaviour
 
   public void ResetWhenTakenFromPool(
     Vector2 position,
-    SeagullIndex seagullIndex,
+    PooledObjectIndex seagullIndex,
     float spawnDelay        = _defaultSpawnDelay,
     float spawnPeriod       = _defaultSpawnPeriod,
     float spawnInitialSpeed = _defaultSpawnInitialSpeed)
@@ -49,7 +49,7 @@ public abstract class SeagullSpawner : MonoBehaviour
     _spriteRenderer.color = _originalColor;
 
     switch (_seagullIndex) {
-      case SeagullIndex.Homing:
+      case PooledObjectIndex.Homing:
       {
         _spawnPeriod       *= 2;
         _spawnInitialSpeed /= 1.5f;
@@ -69,7 +69,7 @@ public abstract class SeagullSpawner : MonoBehaviour
   protected void SpawnSeagull(Vector3 position, Vector3 velocity)
   {
     GameObject obj = ObjectPooler.Instance.GetPooledObject(_seagullIndex);
-    obj.GetComponent<SeagullBehaviour>().ResetWhenTakenFromPool(position, velocity);
+    obj.GetComponentInChildren<SeagullBehaviour>().ResetWhenTakenFromPool(position, velocity);
     obj.SetActive(true);
   }
 }

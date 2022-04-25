@@ -14,12 +14,17 @@ public class SpawnerIngressor : Ingressor
   public override float Ingress(float difficulty)
   {
     // Select a seagull type based on difficulty
-    SeagullIndex seagullIndex = selectSeagullIndex(difficulty);
+    PooledObjectIndex seagullIndex = selectSeagullIndex(difficulty);
 
     // Spawn a spawner
-    GameObject obj = ObjectPooler.Instance.GetPooledObject(SeagullIndex.RandomSpawner);
+    GameObject obj = ObjectPooler.Instance.GetPooledObject(PooledObjectIndex.ScattershotSpawner);
     obj.GetComponent<SeagullSpawner>().ResetWhenTakenFromPool(EdgeUtil.GetRandomPositionAlongEdge(Edge.TopOnly), seagullIndex);
     obj.SetActive(true);
+
+    // Spawn a piece of debris
+    GameObject debris = ObjectPooler.Instance.GetPooledObject(selectDebrisIndex());
+    debris.GetComponent<Debris>().ResetWhenTakenFromPool(EdgeUtil.GetRandomPositionAlongEdge(Edge.TopOnly));
+    debris.SetActive(true);
 
     // Select a wait time
     float waitTime = selectWaitTime(difficulty);
@@ -29,9 +34,14 @@ public class SpawnerIngressor : Ingressor
 
   // ================== Helpers
 
-  private SeagullIndex selectSeagullIndex(float difficulty)
+  private PooledObjectIndex selectDebrisIndex()
   {
-    return difficulty < Random.value ? SeagullIndex.Linear : SeagullIndex.Homing;
+    return (PooledObjectIndex) Random.Range((int) PooledObjectIndex.PopsicleDebris, (int) PooledObjectIndex.SlushieDebris);
+  }
+
+  private PooledObjectIndex selectSeagullIndex(float difficulty)
+  {
+    return difficulty < Random.value ? PooledObjectIndex.Linear : PooledObjectIndex.Homing;
   }
 
   private float selectWaitTime(float difficulty)

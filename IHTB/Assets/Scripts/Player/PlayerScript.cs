@@ -17,7 +17,7 @@ public class PlayerScript : MonoBehaviour
   void Start()
   {
     this.initialPosition = this.transform.position;
-    Debug.Log("player position: " + this.initialPosition);
+    // Debug.Log("player position: " + this.initialPosition);
 
     this.livesSystem.DisplayLives(3, 3);
   }

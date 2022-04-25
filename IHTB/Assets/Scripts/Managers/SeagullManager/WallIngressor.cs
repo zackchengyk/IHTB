@@ -98,7 +98,7 @@ public class WallIngressor : MonoBehaviour
 
   private void spawnLinearSeagull(Vector3 position, Vector3 velocity)
   {
-    GameObject obj = ObjectPooler.Instance.GetPooledObject(SeagullIndex.Linear);
+    GameObject obj = ObjectPooler.Instance.GetPooledObject(PooledObjectIndex.Linear);
 
     obj.GetComponent<SeagullBehaviour>().ResetWhenTakenFromPool(position, velocity);
     obj.SetActive(true);

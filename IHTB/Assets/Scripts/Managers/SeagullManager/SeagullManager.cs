@@ -2,15 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SeagullIndex : int
-{
-  Linear = 0,
-  Curved = 1,
-  Sniper = 2,
-  Homing = 3,
-  RandomSpawner = 4,
-}
-
 [DisallowMultipleComponent]
 public class SeagullManager : MonoBehaviour
 {
@@ -46,7 +37,7 @@ public class SeagullManager : MonoBehaviour
   void FixedUpdate()
   {
     _difficulty = Mathf.Clamp((Time.time - _startTime) / _maxDifficultyTime, 0.0f, 1.0f);
-    Debug.Log(_difficulty);
+    // Debug.Log(_difficulty);
   }
 
   private IEnumerator enterIngressors()
