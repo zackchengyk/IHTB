@@ -53,7 +53,7 @@ public abstract class SeagullSpawner : MonoBehaviour
       {
         _spawnPeriod       *= 2;
         _spawnInitialSpeed /= 1.5f;
-        _spriteRenderer.color = Color.red;
+        _spriteRenderer.color = new Color32(0xFF, 0x57, 0x4F, 0xFF);
         break;
       }
     }

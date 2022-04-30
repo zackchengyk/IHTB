@@ -9,15 +9,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8499774254189094043, guid: 7e292feafb1fc4eb18dcd78cdd167deb, type: 3}
       propertyPath: m_Color.b
-      value: 0.14831792
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8499774254189094043, guid: 7e292feafb1fc4eb18dcd78cdd167deb, type: 3}
       propertyPath: m_Color.g
-      value: 0.5814599
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8499774254189094043, guid: 7e292feafb1fc4eb18dcd78cdd167deb, type: 3}
       propertyPath: m_Color.r
-      value: 0.9528302
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8499774255021193685, guid: 7e292feafb1fc4eb18dcd78cdd167deb, type: 3}
       propertyPath: m_RootOrder
@@ -65,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8499774255021193686, guid: 7e292feafb1fc4eb18dcd78cdd167deb, type: 3}
       propertyPath: m_Name
-      value: ScattershotSpawner
+      value: ScattershotSpawner Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e292feafb1fc4eb18dcd78cdd167deb, type: 3}

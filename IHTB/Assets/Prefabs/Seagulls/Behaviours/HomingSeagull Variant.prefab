@@ -53,7 +53,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6572387129647411221, guid: 5e9daeaad2f4842f9bdf3d4df970aeaa, type: 3}
       propertyPath: m_Name
-      value: HomingSeagull
+      value: HomingSeagull Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7014742738788182576, guid: 5e9daeaad2f4842f9bdf3d4df970aeaa, type: 3}
+      propertyPath: m_Color.b
+      value: 0.30980393
+      objectReference: {fileID: 0}
+    - target: {fileID: 7014742738788182576, guid: 5e9daeaad2f4842f9bdf3d4df970aeaa, type: 3}
+      propertyPath: m_Color.g
+      value: 0.34117648
+      objectReference: {fileID: 0}
+    - target: {fileID: 7014742738788182576, guid: 5e9daeaad2f4842f9bdf3d4df970aeaa, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e9daeaad2f4842f9bdf3d4df970aeaa, type: 3}
@@ -74,3 +86,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759987636dc7d4770bb23017220a1f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isHoming: 0
