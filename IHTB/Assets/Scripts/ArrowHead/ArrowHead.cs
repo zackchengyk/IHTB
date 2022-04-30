@@ -7,16 +7,15 @@ public class ArrowHead : MonoBehaviour
   private Rigidbody2D _rigidbody2D;
   private Animator _animator;
   private bool _isRolling = false;
+  private int  _rolledThroughCount = 0;
   private bool _canRoll = true;
-  // private bool _invulnerable = false;
   private bool _isDead = false;
+  private bool _hasBeenHitThisTick = false;
 
   [SerializeField] private float _speed = 4f;
   [SerializeField] private float _rollSpeedMultiplier = 1.7f;
   [SerializeField] private float _rollDuration = 0.4f;
   [SerializeField] private float _rollCooldown = 0.2f;
-
-  private int _comboCounter = 0;
 
   [SerializeField] private int _currentHP = 3;
   [SerializeField] private int _maxHP = 3;
@@ -45,6 +44,9 @@ public class ArrowHead : MonoBehaviour
 
   void FixedUpdate()
   {
+    // Reset this
+    _hasBeenHitThisTick = false;
+
     // If the game is paused, or the player is rolling or dead, do not update
     if (InputManager.Instance.Pausing || _isRolling || _isDead) return;
 
@@ -67,21 +69,17 @@ public class ArrowHead : MonoBehaviour
   // On trigger enter, increase combo if the other collider is a projectile and the player IS rolling
   void OnTriggerEnter2D(Collider2D other)
   {
-    if (other.CompareTag("ProjectileWide") && _isRolling)
-    {
-      _comboCounter++;
-      Debug.Log("Combo x " + _comboCounter + "!");
-    }
+    if (other.CompareTag("ProjectileWide") && _isRolling) _rolledThroughCount += 1;
   }
 
   // On trigger stay, get hit if the other collider is a projectile and the player IS NOT rolling
   void OnTriggerStay2D(Collider2D other)
   {
-    if (other.CompareTag("Projectile") && !_isRolling) 
+    if (other.CompareTag("Projectile") && !_isRolling && !_hasBeenHitThisTick) 
     {
+      _hasBeenHitThisTick = true;
       GetHit(other.transform.root.gameObject);
-      _comboCounter = 0;
-      Debug.Log("Combo broken!");
+      ScoreManager.Instance.DownMultiplier();
     }
   }
 
@@ -144,8 +142,8 @@ public class ArrowHead : MonoBehaviour
   private IEnumerator roll()
   {
     _isRolling = true;
-    // Physics2D.IgnoreLayerCollision(7, 8, true);
     _canRoll = false;
+    _rolledThroughCount = 0;
 
     _animator.SetTrigger("rollTrigger");
     _animator.speed = 1 / _rollDuration;
@@ -154,9 +152,9 @@ public class ArrowHead : MonoBehaviour
     yield return new WaitForSeconds(_rollDuration);
 
     _isRolling = false;
-    // if (!_invulnerable) Physics2D.IgnoreLayerCollision(7, 8, false);
 
     _animator.speed = 1;
+    ScoreManager.Instance.UpMultiplier(_rolledThroughCount);
 
     yield return new WaitForSeconds(_rollCooldown);
 

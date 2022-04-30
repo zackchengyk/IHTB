@@ -12,11 +12,6 @@ public class PlayerManager : MonoBehaviour
 
   public GameObject PlayerGameObject { get { return _player; } }
 
-  public ArrowHead PlayerScript
-  {
-    get { return _player.GetComponent<ArrowHead>(); }
-  }
-
   public Vector2 PlayerPosition 
   {
     get {
