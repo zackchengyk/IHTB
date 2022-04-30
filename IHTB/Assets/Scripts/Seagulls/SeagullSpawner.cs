@@ -15,7 +15,9 @@ public abstract class SeagullSpawner : MonoBehaviour
   protected SpriteRenderer _spriteRenderer;
   private   Color          _originalColor;
 
-  // ================== Methods
+    // ================== Methods
+
+ [SerializeField] private AudioClip _spawnSound;
 
   void Awake()
   {
@@ -66,10 +68,15 @@ public abstract class SeagullSpawner : MonoBehaviour
 
   // ================== Helpers
   
-  protected void SpawnSeagull(Vector3 position, Vector3 velocity)
+  protected void SpawnSeagull(Vector3 position, Vector3 velocity, bool playSound = true)
   {
     GameObject obj = ObjectPooler.Instance.GetPooledObject(_seagullIndex);
     obj.GetComponentInChildren<SeagullBehaviour>().ResetWhenTakenFromPool(position, velocity);
     obj.SetActive(true);
+
+    if (playSound)
+    {
+       SoundManager.Audio.Play(_spawnSound, 0.95f, 1.15f);
+    }
   }
 }

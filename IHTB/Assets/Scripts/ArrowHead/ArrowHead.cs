@@ -29,6 +29,8 @@ public class ArrowHead : MonoBehaviour
 
   [SerializeField] private float _deathDuration = 1f;
 
+  [SerializeField] private AudioClip _onHitSound;
+ 
   // ================== Methods
 
   void Awake()
@@ -107,6 +109,10 @@ public class ArrowHead : MonoBehaviour
     {
       StartCoroutine(die());
       return;
+    }
+    else
+    {
+      SoundManager.Audio.Play(_onHitSound, 0.95f, 1.15f);
     }
     
     // Slow time temporarily

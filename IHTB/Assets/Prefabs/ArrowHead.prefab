@@ -265,6 +265,7 @@ MonoBehaviour:
   _hitShakeFrequencyScale: 15
   _hitShakeAmplitudeScale: {x: 0.25, y: 0.25}
   _deathDuration: 1
+  _onHitSound: {fileID: 8300000, guid: 681f34e701859c24281ec8968db0b898, type: 3}
 --- !u!58 &1224851582
 CircleCollider2D:
   m_ObjectHideFlags: 0

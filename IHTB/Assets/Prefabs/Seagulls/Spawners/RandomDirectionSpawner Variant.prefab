@@ -65,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8499774255021193686, guid: 7e292feafb1fc4eb18dcd78cdd167deb, type: 3}
       propertyPath: m_Name
-      value: RandomDirectionSpawner
+      value: RandomDirectionSpawner Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e292feafb1fc4eb18dcd78cdd167deb, type: 3}
@@ -86,3 +86,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2003e0317525d489a85c80e5546f9fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnSound: {fileID: 8300000, guid: ca0d1269ee75d21408febaa90f692ed9, type: 3}
