@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadScene : MonoBehaviour
+public class LoadNextScene : MonoBehaviour
 {
     //[SerializeField] private HorizontalWipe horizontalWipe;
     //[SerializeField] private sth;
 
-    public void playGame() {
+    public void StartNextScene() {
         StartCoroutine(nextScene());
     }
+
 
     IEnumerator nextScene()
     {
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    } 
+    }
 }

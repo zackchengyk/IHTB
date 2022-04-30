@@ -108,6 +108,7 @@ public class ArrowHead : MonoBehaviour
     if (_currentHP == 0)
     {
       StartCoroutine(die());
+      Debug.Log("dead! inside gethit");
       return;
     }
     else
@@ -204,5 +205,8 @@ public class ArrowHead : MonoBehaviour
 
     // gameObject.SetActive(false);
     enabled = false;
-  }
+
+    // load next scene
+    FindObjectOfType<LoadNextScene>().StartNextScene();
+    }
 }

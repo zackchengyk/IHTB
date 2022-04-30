@@ -628,6 +628,10 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 1224851578}
+    - target: {fileID: 6370631024817758416, guid: c16fb48b1c1874294af23db044f306a0, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7006323599200891948, guid: c16fb48b1c1874294af23db044f306a0, type: 3}
       propertyPath: m_RootOrder
       value: 1
