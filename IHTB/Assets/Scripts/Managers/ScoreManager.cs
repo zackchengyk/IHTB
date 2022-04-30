@@ -21,7 +21,7 @@ public class ScoreManager : MonoBehaviour
     get { return _score; }
     set {
       _score = value;
-      _scoreTextMesh.text = "SCORE: " + Mathf.Round(value);
+      _scoreTextMesh.text = "SCORE: " + (int) Mathf.Round(value);
     }
   }
 
@@ -31,7 +31,7 @@ public class ScoreManager : MonoBehaviour
     set {
       int newValue = Mathf.Max(value, 1);
       _multiplier = newValue;
-      _multiplierTextMesh.text = "Multiplier: x" + newValue + new string('!', newValue / 5);
+      _multiplierTextMesh.text = "Multiplier: x" + newValue + new string('!', (int) Mathf.Round(Mathf.Log(newValue, 2)));
     } 
   }
 
