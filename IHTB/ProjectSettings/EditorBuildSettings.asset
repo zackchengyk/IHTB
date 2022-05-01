@@ -6,16 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Jude.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/Credits.unity
-    guid: 8f7588a8d31bff34bbae0a4024ccd87e
-  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: f6383f67d56c8764eacd6bdc381e038b
   - enabled: 1
-    path: Assets/Scenes/Zack.unity
+    path: Assets/Scenes/Game.unity
     guid: 85518790afa96fd49a2deca93edc1598
   - enabled: 1
     path: Assets/Scenes/GameOver.unity

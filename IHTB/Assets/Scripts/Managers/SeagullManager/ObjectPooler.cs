@@ -38,10 +38,10 @@ public class ObjectPooler : MonoBehaviour
 
 	// ================== Methods
   
-	void Awake() { Instance = this; }
+	void Awake()
+  {  
+    Instance = this; 
 
-  void Start ()
-  {
     _pooledObjects = new List<List<GameObject>>();
     
     // For each type of thing to pool

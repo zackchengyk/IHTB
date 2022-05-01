@@ -25,6 +25,8 @@ public class ScoreManager : MonoBehaviour
     }
   }
 
+  public int ScoreInt { get { return (int) Mathf.Round(_score); } }
+
   public int Multiplier 
   { 
     get { return _multiplier; } 
@@ -42,10 +44,10 @@ public class ScoreManager : MonoBehaviour
     Instance = this;
     _score = 0f;
     _multiplier = 1;
-    var textMeshes = gameObject.GetComponentsInChildren<TextMeshProUGUI>();
+    var textMeshes = GetComponentsInChildren<TextMeshProUGUI>();
     _scoreTextMesh = textMeshes[0];
     _multiplierTextMesh = textMeshes[1];
-    _multiplierAnimator = gameObject.GetComponentInChildren<Animator>();
+    _multiplierAnimator = GetComponentInChildren<Animator>();
   }
 
   void FixedUpdate()
