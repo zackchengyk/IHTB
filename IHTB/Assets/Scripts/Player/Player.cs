@@ -99,6 +99,7 @@ public class Player : MonoBehaviour
 
     // Decrement HP
     _currentHP--;
+    _animator.SetInteger("hp", _currentHP);
     _livesSystem.DisplayLives(_currentHP, _maxHP);
 
     // Shake screen
@@ -132,6 +133,8 @@ public class Player : MonoBehaviour
   // This is used in FixedUpdate
   private void updateRunningAnimationStates()
   {
+    _animator.SetInteger("hp", _currentHP);
+
     // Set isRunning
     bool isRunning = _rigidbody2D.velocity.sqrMagnitude > 0;
     _animator.SetBool("isRunning", isRunning);
