@@ -38,6 +38,8 @@ public class InputManager : MonoBehaviour
     { 
       Pausing = !Pausing;
       Time.timeScale = Pausing ? 0 : 1;
+            Debug.Log("OnPauseInput, Pausing == " + Pausing);
+      PauseManager.Instance.TogglePauseMenu(Pausing); //Call the PauseManager
     }
   }
 }
