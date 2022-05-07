@@ -119,9 +119,6 @@ public class Player : MonoBehaviour
     {
       SoundManager.Audio.Play(_onHitSound, 0.95f, 1.15f);
     }
-    
-    // Slow time temporarily
-    TimeManager.Instance.SlowTimeNonLinearRealtime(_hitTimeScale, _hitShakeDurationRealtime);
 
     // Create invulnerability period (may be less or more than shake duration)
     StopCoroutine (startInvulnerabilityPeriodRealtime());
