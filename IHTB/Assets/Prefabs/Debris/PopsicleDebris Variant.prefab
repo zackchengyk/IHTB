@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6848030638477440232, guid: 99d88b947c1764720928693c486c2dcd, type: 3}
       propertyPath: m_Name
-      value: Popsicle
+      value: PopsicleDebris Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7525919290515590012, guid: 99d88b947c1764720928693c486c2dcd, type: 3}
       propertyPath: m_Size.x
@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 7d37036ec10534bc4aacfe19772986f3, type: 3}
+    - target: {fileID: 7525919290515590012, guid: 99d88b947c1764720928693c486c2dcd, type: 3}
+      propertyPath: m_SortingOrder
+      value: -96
+      objectReference: {fileID: 0}
     - target: {fileID: 7525919290515590012, guid: 99d88b947c1764720928693c486c2dcd, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1

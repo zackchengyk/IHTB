@@ -53,20 +53,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6848030638477440232, guid: 99d88b947c1764720928693c486c2dcd, type: 3}
       propertyPath: m_Name
-      value: SlushieDebris
+      value: SlushieDebris Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7525919290515590012, guid: 99d88b947c1764720928693c486c2dcd, type: 3}
       propertyPath: m_Size.x
-      value: 1.25
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7525919290515590012, guid: 99d88b947c1764720928693c486c2dcd, type: 3}
       propertyPath: m_Size.y
-      value: 1.25
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7525919290515590012, guid: 99d88b947c1764720928693c486c2dcd, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f4a3e8224e6184ccbabee190b4881200, type: 3}
+      objectReference: {fileID: 21300000, guid: 97fd4a053cc1e4aaf949101f83cb7150, type: 3}
+    - target: {fileID: 7525919290515590012, guid: 99d88b947c1764720928693c486c2dcd, type: 3}
+      propertyPath: m_SortingOrder
+      value: -96
+      objectReference: {fileID: 0}
     - target: {fileID: 7525919290515590012, guid: 99d88b947c1764720928693c486c2dcd, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1

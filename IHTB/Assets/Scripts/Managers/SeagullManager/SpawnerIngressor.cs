@@ -21,11 +21,6 @@ public class SpawnerIngressor : Ingressor
     obj.GetComponent<SeagullSpawner>().ResetWhenTakenFromPool(EdgeUtil.GetRandomPositionAlongEdge(Edge.TopOnly), seagullIndex);
     obj.SetActive(true);
 
-    // Spawn a piece of debris
-    GameObject debris = ObjectPooler.Instance.GetPooledObject(selectDebrisIndex());
-    debris.GetComponent<Debris>().ResetWhenTakenFromPool(EdgeUtil.GetRandomPositionAlongEdge(Edge.TopOnly));
-    debris.SetActive(true);
-
     // Select a wait time
     float waitTime = selectWaitTime(difficulty);
 

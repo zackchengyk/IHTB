@@ -7,11 +7,13 @@ public class ScrollManager : MonoBehaviour
 {
   public static ScrollManager Instance;
 
+  [SerializeField] private Vector2 _defaultScrollVelocity = new Vector3(0f, -1f);
   [SerializeField] private Vector2 _scrollVelocity = new Vector3(0f, -1f);
   [SerializeField] private Material _backgroundScrollerMaterial;
 
   // ================== Accessors
 
+  public Vector2 DefaultScrollVelocity { get { return _defaultScrollVelocity; } }
   public Vector2 ScrollVelocity
   {
     get { return _scrollVelocity; }
@@ -26,8 +28,6 @@ public class ScrollManager : MonoBehaviour
   void Awake() { Instance = this; }
 
   void Start() { setBackgroundScrollSpeed(); }
-
-  public double getScrollSpeed() { return _scrollVelocity.y;  }
 
   // ================== Helpers
 
