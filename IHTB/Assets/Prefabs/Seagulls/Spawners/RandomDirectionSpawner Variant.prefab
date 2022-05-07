@@ -86,4 +86,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2003e0317525d489a85c80e5546f9fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnSound: {fileID: 8300000, guid: ca0d1269ee75d21408febaa90f692ed9, type: 3}
+  _spawnSounds:
+  - {fileID: 8300000, guid: a55dbc4c849dca447afb81e3fd081689, type: 3}
+  - {fileID: 8300000, guid: 63b28d2ede2836640992caebed4d1ec6, type: 3}

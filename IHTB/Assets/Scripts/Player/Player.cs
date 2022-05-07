@@ -30,7 +30,9 @@ public class Player : MonoBehaviour
 
   [SerializeField] private float _deathDuration = 1f;
 
+  [Header("Sounds")]
   [SerializeField] private AudioClip _onHitSound;
+  [SerializeField] private AudioClip _deathSound; 
  
   // ================== Methods
 
@@ -193,6 +195,8 @@ public class Player : MonoBehaviour
 
     _animator.SetTrigger("deathTrigger");
     _animator.speed = 1 / _deathDuration;
+
+    SoundManager.Audio.Play(_deathSound);
 
     // Todo: particles
 

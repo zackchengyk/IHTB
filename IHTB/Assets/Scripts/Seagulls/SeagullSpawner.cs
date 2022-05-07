@@ -15,11 +15,13 @@ public abstract class SeagullSpawner : MonoBehaviour
   protected SpriteRenderer _spriteRenderer;
   private   Color          _originalColor;
 
+  // AUDIO
+  [SerializeField] private AudioClip[] _spawnSounds;
     // ================== Methods
 
- [SerializeField] private AudioClip _spawnSound;
 
-  void Awake()
+
+    void Awake()
   {
     _rigidbody2D    = GetComponentInChildren<Rigidbody2D>();
     _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -76,7 +78,7 @@ public abstract class SeagullSpawner : MonoBehaviour
 
     if (playSound)
     {
-       SoundManager.Audio.Play(_spawnSound, 0.95f, 1.15f);
+       SoundManager.Audio.PlayRandomSoundFromList(_spawnSounds, 0.95f, 1.15f);
     }
   }
 }
