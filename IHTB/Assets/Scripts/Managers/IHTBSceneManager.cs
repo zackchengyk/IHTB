@@ -17,6 +17,8 @@ public class IHTBSceneManager : MonoBehaviour
 
   public int FinalScore { get { return _finalScore; } }
 
+  public bool IsEasyGame = false;
+
   // ================== Methods
 
   void Awake()

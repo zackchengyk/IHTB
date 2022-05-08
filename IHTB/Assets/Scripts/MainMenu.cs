@@ -20,7 +20,18 @@ public class MainMenu : MonoBehaviour
 
   // ================== GAME
 
-  public void StartGame() { IHTBSceneManager.Instance.ToGameScene(); }
+  public void StartGame()
+  {
+    IHTBSceneManager.Instance.IsEasyGame = false;
+    IHTBSceneManager.Instance.ToGameScene();
+  }
+
+  public void StartEasyGame()
+  {
+    IHTBSceneManager.Instance.IsEasyGame = true;
+    IHTBSceneManager.Instance.ToGameScene();
+  }
+
   public void ExitGame()  { IHTBSceneManager.Instance.ExitGame(); }
 
   // ================== CREDITS

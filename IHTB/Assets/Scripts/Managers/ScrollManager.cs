@@ -7,8 +7,8 @@ public class ScrollManager : MonoBehaviour
 {
   public static ScrollManager Instance;
 
-  [SerializeField] private Vector2 _defaultScrollVelocity = new Vector3(0f, -1f);
-  [SerializeField] private Vector2 _scrollVelocity = new Vector3(0f, -1f);
+  [SerializeField] private Vector2 _defaultScrollVelocity = new Vector3(0f, -1.75f);
+  [SerializeField] private Vector2 _scrollVelocity = new Vector3(0f, -1.75f);
   [SerializeField] private Material _backgroundScrollerMaterial;
 
   // ================== Accessors

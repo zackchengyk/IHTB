@@ -10,10 +10,10 @@ public class Debris : MonoBehaviour
 
   void FixedUpdate() { _rigidbody2D.velocity = ScrollManager.Instance.ScrollVelocity; }
 
-  public void ResetWhenTakenFromPool(Vector2 position, float scale)
+  public void ResetWhenTakenFromPool(Vector2 position, float scale, float angle)
   {
     transform.position = position;
     transform.localScale = new Vector3(scale, scale, scale);
-    transform.eulerAngles = new Vector3(0, 0, Random.Range(0, 360));
+    transform.eulerAngles = new Vector3(0, 0, angle);
   }
 }

@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
   private Rigidbody2D _rigidbody2D;
   private Animator _animator;
+  private int _umbrellaCoverage = 0;
   private bool _isRolling = false;
   private int  _rolledThroughCount = 0;
   private bool _canRoll = true;
@@ -23,7 +24,6 @@ public class Player : MonoBehaviour
   [SerializeField] private LivesSystem _livesSystem;
 
   [SerializeField] private float   _hitShakeDurationRealtime = 1f;
-  [SerializeField] private float   _hitTimeScale = 1f;
   [SerializeField] private float   _hitInvulnerabilityPeriodRealtime = 1.5f;
   [SerializeField] private float   _hitShakeFrequencyScale = 15f;
   [SerializeField] private Vector2 _hitShakeAmplitudeScale = Vector2.one / 4;
@@ -34,6 +34,14 @@ public class Player : MonoBehaviour
   [SerializeField] private AudioClip _onHitSound;
   [SerializeField] private AudioClip _deathSound; 
  
+  // ================== Accessors
+
+  public int UmbrellaCoverage 
+  {
+    get { return _umbrellaCoverage; }
+    set { _umbrellaCoverage = value; }
+  }
+
   // ================== Methods
 
   void Awake()
@@ -49,6 +57,8 @@ public class Player : MonoBehaviour
 
   void FixedUpdate()
   {
+    Debug.Log(_umbrellaCoverage);
+
     // Reset this
     _hasBeenHitThisTick = false;
 
@@ -74,17 +84,16 @@ public class Player : MonoBehaviour
   // On trigger enter, increase combo if the other collider is a projectile and the player IS rolling
   void OnTriggerEnter2D(Collider2D other)
   {
-    if (other.CompareTag("ProjectileWide") && _isRolling) _rolledThroughCount += 1;
+    if (other.CompareTag("ProjectileWide") && _isRolling && _umbrellaCoverage < 1) _rolledThroughCount += 1;
   }
 
   // On trigger stay, get hit if the other collider is a projectile and the player IS NOT rolling
   void OnTriggerStay2D(Collider2D other)
   {
-    if (other.CompareTag("Projectile") && !_isRolling && !_hasBeenHitThisTick) 
+    if (other.CompareTag("Projectile") && !_isRolling && _umbrellaCoverage < 1 && !_hasBeenHitThisTick) 
     {
       _hasBeenHitThisTick = true;
       GetHit(other.transform.root.gameObject);
-      ScoreManager.Instance.DownMultiplier();
     }
   }
 
@@ -101,6 +110,9 @@ public class Player : MonoBehaviour
     _currentHP--;
     _animator.SetInteger("hp", _currentHP);
     _livesSystem.DisplayLives(_currentHP, _maxHP);
+
+    // Decrease multiplier
+    ScoreManager.Instance.DownMultiplier();
 
     // Shake screen
     ShakerManager.Instance.ShakeOnceNonLinearRealtime(

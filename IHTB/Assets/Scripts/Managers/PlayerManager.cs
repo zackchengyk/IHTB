@@ -6,6 +6,8 @@ public class PlayerManager : MonoBehaviour
   public static PlayerManager Instance;
   
   [SerializeField] private GameObject _player;
+
+  private Player _playerScript;
   private Vector2 _lastPlayerLocation;
 
   // ================== Accessors
@@ -20,10 +22,16 @@ public class PlayerManager : MonoBehaviour
       return _lastPlayerLocation;
     }
   }
+
+  public Player PlayerScript { get { return _playerScript; } }
   
   public bool PlayerIsAlive { get; set; } = true;
 
   // ================== Methods
 
-  void Awake() { Instance = this; }
+  void Awake()
+  {
+    Instance = this;
+    _playerScript = _player.GetComponent<Player>();
+  }
 }

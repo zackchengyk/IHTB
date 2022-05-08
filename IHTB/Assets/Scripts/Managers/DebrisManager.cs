@@ -9,7 +9,7 @@ public class DebrisManager : MonoBehaviour
 
   private Vector2 _screenDimensions;
   private float _fractionOfScreenWidthThatIsBeach = 0.6f;
-  private float _buffer = 0.5f;
+  private float _yBuffer = 1f;
 
   // ================== Methods
 
@@ -27,15 +27,18 @@ public class DebrisManager : MonoBehaviour
     // Spawn initial debris
     float defaultScrollSpeed = Mathf.Abs(ScrollManager.Instance.DefaultScrollVelocity.y);
     float currTime = selectWaitTime();
-    float timeToScrollScreen = _screenDimensions.y * 2 / defaultScrollSpeed;
+    float timeToScrollScreen = (_yBuffer + _screenDimensions.y * 2) / defaultScrollSpeed;
     while (currTime < timeToScrollScreen)
     {
       // Spawn a piece of debris
       PooledObjectIndex index = selectDebrisIndex();
       GameObject debris = ObjectPooler.Instance.GetPooledObject(index);
-      Vector2 position = selectDebrisPosition(index);
-      position.y = -_screenDimensions.y + currTime * defaultScrollSpeed;
-      debris.GetComponent<Debris>().ResetWhenTakenFromPool(position, selectDebrisScale());
+      Vector2 modifiedPosition = selectDebrisPosition(index);
+      modifiedPosition.y = -_screenDimensions.y - _yBuffer + currTime * defaultScrollSpeed;
+      debris.GetComponent<Debris>().ResetWhenTakenFromPool(
+        modifiedPosition,
+        selectDebrisScale   (index),
+        selectDebrisRotation(index));
       debris.SetActive(true);
 
       currTime += selectWaitTime();
@@ -49,7 +52,10 @@ public class DebrisManager : MonoBehaviour
       // Spawn a piece of debris
       PooledObjectIndex index = selectDebrisIndex();
       GameObject debris = ObjectPooler.Instance.GetPooledObject(index);
-      debris.GetComponent<Debris>().ResetWhenTakenFromPool(selectDebrisPosition(index), selectDebrisScale());
+      debris.GetComponent<Debris>().ResetWhenTakenFromPool(
+        selectDebrisPosition(index),
+        selectDebrisScale   (index),
+        selectDebrisRotation(index));
       debris.SetActive(true);
 
       // Wait between spawns
@@ -61,36 +67,82 @@ public class DebrisManager : MonoBehaviour
 
   private PooledObjectIndex selectDebrisIndex()
   {
-    return (PooledObjectIndex) Random.Range((int) PooledObjectIndex.PopsicleDebris, (int) PooledObjectIndex.SlushieDebris);
+    // This is funny
+    if (IHTBSceneManager.Instance.IsEasyGame) return PooledObjectIndex.UmbrellaDebris;
+
+    return (PooledObjectIndex) Random.Range((int) PooledObjectIndex.PopsicleDebris, (int) PooledObjectIndex.BottleDebrisAgain + 1);
   }
 
   private Vector2 selectDebrisPosition(PooledObjectIndex index)
   {
-    if (index == PooledObjectIndex.PopsicleDebris || index == PooledObjectIndex.SlushieDebris)
+    if (index == PooledObjectIndex.PopsicleDebris ||
+      index == PooledObjectIndex.SlushieDebris ||
+      index == PooledObjectIndex.BirdPoop1Debris ||
+      index == PooledObjectIndex.BirdPoop2Debris ||
+      index == PooledObjectIndex.DirtDebris)
     {
       return selectBoardwalkPosition();
     }
 
+    if (index == PooledObjectIndex.TowelBlueDebris ||
+      index == PooledObjectIndex.TowelCyanDebris ||
+      index == PooledObjectIndex.TowelGreenDebris ||
+      index == PooledObjectIndex.TowelPurpleDebris ||
+      index == PooledObjectIndex.UmbrellaDebris)
+    {
+      return selectConstrainedBeachPosition();
+    }
+
     return selectBeachPosition();
+  }
+
+  private Vector2 selectConstrainedBeachPosition() 
+  {
+    return new Vector2(
+      _screenDimensions.x * Random.Range(-_fractionOfScreenWidthThatIsBeach + 0.2f, _fractionOfScreenWidthThatIsBeach - 0.1f),
+      _screenDimensions.y + _yBuffer);
   }
 
   private Vector2 selectBeachPosition() 
   {
     return new Vector2(
       _screenDimensions.x * Random.Range(-_fractionOfScreenWidthThatIsBeach, _fractionOfScreenWidthThatIsBeach),
-      _screenDimensions.y + _buffer);
+      _screenDimensions.y + _yBuffer);
   }
 
   private Vector2 selectBoardwalkPosition()
   {
     return new Vector2(
       _screenDimensions.x * Random.Range(_fractionOfScreenWidthThatIsBeach + 0.1f, 0.9f),
-      _screenDimensions.y + _buffer);
+      _screenDimensions.y + _yBuffer);
   }
 
-  private float selectDebrisScale()
+  private float selectDebrisScale(PooledObjectIndex index)
   {
+    if (index == PooledObjectIndex.TowelBlueDebris ||
+      index == PooledObjectIndex.TowelCyanDebris ||
+      index == PooledObjectIndex.TowelGreenDebris ||
+      index == PooledObjectIndex.TowelPurpleDebris ||
+      index == PooledObjectIndex.UmbrellaDebris)
+    {
+      return 1;
+    }
+
     return RandomUtil.Triangular(0.65f, 0.85f);
+  }
+
+  private float selectDebrisRotation(PooledObjectIndex index)
+  {
+    if (index == PooledObjectIndex.TowelBlueDebris ||
+      index == PooledObjectIndex.TowelCyanDebris ||
+      index == PooledObjectIndex.TowelGreenDebris ||
+      index == PooledObjectIndex.TowelPurpleDebris ||
+      index == PooledObjectIndex.UmbrellaDebris)
+    {
+      return 0;
+    }
+
+    return Random.Range(0, 360);
   }
 
   private float selectWaitTime()

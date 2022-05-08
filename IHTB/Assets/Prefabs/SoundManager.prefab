@@ -52,8 +52,10 @@ MonoBehaviour:
   - {fileID: 8395843649720153415}
   - {fileID: 2837256244454023769}
   MusicSource: {fileID: 6583454457232182685}
-  musicStart: {fileID: 0}
-  music: {fileID: 0}
+  musicVolume: 0.8
+  effectsVolume: 0.5
+  musicStart: {fileID: 8300000, guid: aba4c2dd936e9434f859781429eb954d, type: 3}
+  music: {fileID: 8300000, guid: 05597f9c1039f3b42a4d2a40e18ebc3a, type: 3}
   clickSound: {fileID: 8300000, guid: 6e076bd85c2fada4a854584fe13220b3, type: 3}
 --- !u!82 &6583454457232182685
 AudioSource:

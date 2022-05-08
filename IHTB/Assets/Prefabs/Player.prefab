@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 810075767}
   m_Layer: 8
   m_Name: ShadowSprite
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6493931253223119551}
   m_Layer: 8
   m_Name: Sprite
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -264,7 +264,7 @@ MonoBehaviour:
   _hitInvulnerabilityPeriodRealtime: 1.5
   _hitShakeFrequencyScale: 15
   _hitShakeAmplitudeScale: {x: 0.25, y: 0.25}
-  _deathDuration: 1
+  _deathDuration: 3.5
   _onHitSound: {fileID: 8300000, guid: 5ea09e2acf17b2b4db0fd7798eb54872, type: 3}
   _deathSound: {fileID: 8300000, guid: 7a92c6b38ff70484e930cdf827b98bc6, type: 3}
 --- !u!58 &1224851582
