@@ -84,7 +84,7 @@ public class DebrisManager : MonoBehaviour
   private Vector2 selectBoardwalkPosition()
   {
     return new Vector2(
-      _screenDimensions.x * Random.Range(_fractionOfScreenWidthThatIsBeach, 1),
+      _screenDimensions.x * Random.Range(_fractionOfScreenWidthThatIsBeach + 0.1f, 0.9f),
       _screenDimensions.y + _buffer);
   }
 

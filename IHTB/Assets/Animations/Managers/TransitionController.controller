@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WipeOutRight
+  m_Name: WipeExit
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -21,7 +21,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 35a11a3f179bb48d0a953d9dd5c77b2b, type: 2}
+  m_Motion: {fileID: 7400000, guid: 78c5ab05a5f0a4275977105d56e2f8c5, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -34,7 +34,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WipeInLeft
+  m_Name: WipeEnter
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -48,7 +48,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 78c5ab05a5f0a4275977105d56e2f8c5, type: 2}
+  m_Motion: {fileID: 7400000, guid: 35a11a3f179bb48d0a953d9dd5c77b2b, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -107,7 +107,7 @@ AnimatorController:
   m_Name: TransitionController
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: WipeInLeftTrigger
+  - m_Name: SceneChangeTrigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -190,7 +190,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: WipeInLeftTrigger
+    m_ConditionEvent: SceneChangeTrigger
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7903493349720681842}

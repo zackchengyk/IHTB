@@ -11,6 +11,7 @@ public class IHTBSceneManager : MonoBehaviour
   private Animator _animator;
   private float _screenWipeDuration = 0.4f;
   private int _finalScore = 0;
+  private bool _sceneChanging = false; // some kind of mutex
 
   // ================== Accessors
 
@@ -53,8 +54,11 @@ public class IHTBSceneManager : MonoBehaviour
 
   IEnumerator toScene(int i)
   {
-    _animator.SetTrigger("WipeInLeftTrigger");
+    if (_sceneChanging) yield break;
+    _sceneChanging = true;
+    _animator.SetTrigger("SceneChangeTrigger");
     yield return new WaitForSeconds(_screenWipeDuration);
     SceneManager.LoadScene(i);
+    _sceneChanging = false;
   }
 }

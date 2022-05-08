@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WipeOutRight
+  m_Name: MidToRight
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -22,20 +22,20 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: 185.74054
         inSlope: 0
-        outSlope: 0
-        tangentMode: 136
+        outSlope: 1881.3562
+        tangentMode: 69
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.98333335
-        value: 1600
-        inSlope: 1627.1187
+        value: 2035.7407
+        inSlope: 1881.3562
         outSlope: 0
-        tangentMode: 5
-        weightedMode: 1
+        tangentMode: 69
+        weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       m_PreInfinity: 2
@@ -50,7 +50,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: 871.48096
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -59,7 +59,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.98333335
-        value: 0
+        value: 871.48047
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -122,20 +122,20 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: 185.74054
         inSlope: 0
-        outSlope: 0
-        tangentMode: 136
+        outSlope: 1881.3562
+        tangentMode: 69
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.98333335
-        value: 1600
-        inSlope: 1627.1187
+        value: 2035.7407
+        inSlope: 1881.3562
         outSlope: 0
-        tangentMode: 5
-        weightedMode: 1
+        tangentMode: 69
+        weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       m_PreInfinity: 2
@@ -150,7 +150,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: 871.48096
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -159,7 +159,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.98333335
-        value: 0
+        value: 871.48047
         inSlope: 0
         outSlope: 0
         tangentMode: 136
