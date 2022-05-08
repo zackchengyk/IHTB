@@ -57,13 +57,11 @@ public class Player : MonoBehaviour
 
   void FixedUpdate()
   {
-    Debug.Log(_umbrellaCoverage);
-
     // Reset this
     _hasBeenHitThisTick = false;
 
     // If the game is paused, or the player is rolling or dead, do not update
-    if (InputManager.Instance.Pausing || _isRolling || _isDead) return;
+    if (PauseManager.Instance.Pausing || _isRolling || _isDead) return;
 
     // Start roll if requested
     if (_canRoll &&

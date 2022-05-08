@@ -8,7 +8,6 @@ public class InputManager : MonoBehaviour
 
 	[HideInInspector] public Vector2 Movement  { get; private set; }
 	[HideInInspector] public bool    DodgeRoll { get; private set; } = false;
-	[HideInInspector] public bool    Pausing   { get; set;         } = false;
 
   void Awake() { Instance = this; }
 
@@ -36,10 +35,7 @@ public class InputManager : MonoBehaviour
   {
     if (context.started)
     { 
-      Pausing = !Pausing;
-      Time.timeScale = Pausing ? 0 : 1;
-            Debug.Log("OnPauseInput, Pausing == " + Pausing);
-      PauseManager.Instance.TogglePauseMenu(Pausing); //Call the PauseManager
+      PauseManager.Instance?.TogglePauseMenu(); //Call the PauseManager
     }
   }
 }
