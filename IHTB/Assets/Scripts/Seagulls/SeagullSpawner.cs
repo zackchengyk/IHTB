@@ -17,11 +17,10 @@ public abstract class SeagullSpawner : MonoBehaviour
 
   // AUDIO
   [SerializeField] private AudioClip[] _spawnSounds;
-    // ================== Methods
-
-
-
-    void Awake()
+    
+  // ================== Methods
+  
+  void Awake()
   {
     _rigidbody2D    = GetComponentInChildren<Rigidbody2D>();
     _spriteRenderer = GetComponentInChildren<SpriteRenderer>();

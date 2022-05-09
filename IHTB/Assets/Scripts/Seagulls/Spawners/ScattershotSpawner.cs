@@ -43,6 +43,11 @@ public class ScattershotSpawner : SeagullSpawner
 
   private Vector2 getNormalizedDirectionToPlayer()
   {
+    if (!PlayerManager.Instance)
+    {
+      float random = Random.Range(0.0f, 2.0f * Mathf.PI);
+      return new Vector2(Mathf.Cos(random), Mathf.Sin(random));
+    }
     return (PlayerManager.Instance.PlayerPosition - _rigidbody2D.position).normalized;
   }
 

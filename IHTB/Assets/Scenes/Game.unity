@@ -885,6 +885,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7702101505193757247, guid: c16fb48b1c1874294af23db044f306a0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c16fb48b1c1874294af23db044f306a0, type: 3}
 --- !u!1001 &6493931253895498120

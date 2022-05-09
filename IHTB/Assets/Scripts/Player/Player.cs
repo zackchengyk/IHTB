@@ -36,6 +36,12 @@ public class Player : MonoBehaviour
  
   // ================== Accessors
 
+  private bool _invulnerable
+  {
+    get { return Physics2D.GetIgnoreLayerCollision(7, 8); }
+    set { Physics2D.IgnoreLayerCollision(7, 8, value); }
+  }
+
   public int UmbrellaCoverage 
   {
     get { return _umbrellaCoverage; }
@@ -48,6 +54,7 @@ public class Player : MonoBehaviour
   {
     _rigidbody2D = GetComponent<Rigidbody2D>();
     _animator = GetComponentInChildren<Animator>();
+    _invulnerable = false;
   }
 
   void Start()
@@ -64,19 +71,22 @@ public class Player : MonoBehaviour
     if (PauseManager.Instance.Pausing || _isRolling || _isDead) return;
 
     // Start roll if requested
-    if (_canRoll &&
-        InputManager.Instance.DodgeRoll && 
-        InputManager.Instance.Movement.sqrMagnitude > 0)
+    if (_canRoll && InputManager.Instance.DodgeRoll)
     {
-      StartCoroutine(roll());
+      // If not already moving, roll forward
+      Vector2 rollDirection = InputManager.Instance.Movement.sqrMagnitude == 0 ?
+        Vector2.up :
+        InputManager.Instance.Movement;
+ 
+      StartCoroutine(roll(rollDirection));
       return;
     }
     
     // Update velocity
     _rigidbody2D.velocity = InputManager.Instance.Movement * _speed;
 
-    // Update running animation state(s)
-    updateRunningAnimationStates();
+    // Update animation state(s)
+    updateAnimationStates();
   }
 
   // On trigger enter, increase combo if the other collider is a projectile and the player IS rolling
@@ -138,28 +148,31 @@ public class Player : MonoBehaviour
   // ================== Helpers
 
   // This is used in FixedUpdate
-  private void updateRunningAnimationStates()
+  private void updateAnimationStates()
   {
+    // Set hp
     _animator.SetInteger("hp", _currentHP);
 
     // Set isRunning
     bool isRunning = _rigidbody2D.velocity.sqrMagnitude > 0;
     _animator.SetBool("isRunning", isRunning);
 
-    // Don't bother with direction if not running
-    if (!isRunning) return;
-
     // Set runningDirection
-    Vector2 vec = _rigidbody2D.velocity.normalized;
-    float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
-    if      (-135 <= angle && angle <= -45) _animator.SetInteger("runningDirection", 0);
-    else if ( -45 <  angle && angle <   45) _animator.SetInteger("runningDirection", 1);
-    else if (  45 <= angle && angle <= 135) _animator.SetInteger("runningDirection", 2);
-    else                                    _animator.SetInteger("runningDirection", 3);
+    int runningDirection = 2; // up, by default
+    if (isRunning)
+    {
+      Vector2 vec = _rigidbody2D.velocity.normalized;
+      float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
+      if      (-135 <= angle && angle <= -45) runningDirection = 0;
+      else if ( -45 <  angle && angle <   45) runningDirection = 1;
+      else if (  45 <= angle && angle <= 135) runningDirection = 2;
+      else                                    runningDirection = 3;
+    }
+    _animator.SetInteger("runningDirection", runningDirection);
   }
 
   // This executes a roll
-  private IEnumerator roll()
+  private IEnumerator roll(Vector2 rollDirection)
   {
     _isRolling = true;
     _canRoll = false;
@@ -167,7 +180,7 @@ public class Player : MonoBehaviour
 
     _animator.SetTrigger("rollTrigger");
     _animator.speed = 1 / _rollDuration;
-    _rigidbody2D.velocity = InputManager.Instance.Movement * _rollSpeedMultiplier * _speed;
+    _rigidbody2D.velocity = rollDirection * _rollSpeedMultiplier * _speed;
 
     yield return new WaitForSeconds(_rollDuration);
 
@@ -183,15 +196,13 @@ public class Player : MonoBehaviour
   // This makes the player temporarily invulnerable
   private IEnumerator startInvulnerabilityPeriodRealtime()
   {
-    Physics2D.IgnoreLayerCollision(7, 8, true);
-
     _animator.SetBool("invulnerable", true);
+    _invulnerable = true;
 
     yield return new WaitForSecondsRealtime(_hitInvulnerabilityPeriodRealtime);
 
-    Physics2D.IgnoreLayerCollision(7, 8, false);
-
     _animator.SetBool("invulnerable", false);
+    _invulnerable = false;
   }
 
   // This is called when the player dies
